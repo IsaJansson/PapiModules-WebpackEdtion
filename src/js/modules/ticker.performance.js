@@ -1,18 +1,12 @@
 ﻿// This JavaScript file is created by Cision for our ticker performance module.
 // Built to be used in combination with sharegraph.html, tickerLarge.html or tickerSmall.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.performance = function($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.ticker.accessKey,
+        texts = window.cision.websolution.texts[settings.uiLanguage];
 
-cision.websolution.performance = !cision.websolution.settings.ticker ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.ticker.accessKey,
-        texts = cision.websolution.texts[settings.uiLanguage];
-
-    var render = function (options) {
+        var render = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -21,7 +15,7 @@ cision.websolution.performance = !cision.websolution.settings.ticker ? {} : func
             return;
         }
 
-        var promiseTickerPerformance = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share performance", 'path': 'Ticker/' + accessKey + '/Performance' });
+        var promiseTickerPerformance = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share performance", 'path': 'Ticker/' + accessKey + '/Performance' });
 
         return Promise.resolve(promiseTickerPerformance).then(function (rawData) {
             var rawInstruments = rawData.Instruments;
@@ -45,7 +39,7 @@ cision.websolution.performance = !cision.websolution.settings.ticker ? {} : func
                 objInstrument.KeyRatioTimeFormatted = moment(objInstrument.KeyRatioTime).locale(settings.uiLanguage).format(settings.dateFormatOptions.dateTimeFormat);
 
                 var compositeModel = $.extend(objInstrument, texts, settings),
-                    renderedHtml = $(tplElement).render(compositeModel, cision.websolution.formatHelpers);
+                    renderedHtml = $(tplElement).render(compositeModel, window.cision.websolution.formatHelpers);
                 htmls += renderedHtml;
             }
             var tplTarget = '#' + (settings.outputTargetElement || 'target-share-performance'); 
@@ -57,4 +51,4 @@ cision.websolution.performance = !cision.websolution.settings.ticker ? {} : func
     return {
         render: render
     };
-}(jQuery);
+} (jQuery);

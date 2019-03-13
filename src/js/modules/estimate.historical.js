@@ -1,16 +1,9 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.estimate = cision.websolution.estimate || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.estimate.historical = !cision.websolution.settings.estimate ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.estimate.accessKey,
+window.cision.websolution.estimate.historical = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.estimate.accessKey,
         chart;
 
     var render = function (options) {
@@ -26,7 +19,7 @@ cision.websolution.estimate.historical = !cision.websolution.settings.estimate ?
             field: settings.field
         };
 
-        var promiseEstimateHistorical = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate historical", 'path': 'Estimate/' + accessKey + '/Historical', 'postData': postData });
+        var promiseEstimateHistorical = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate historical", 'path': 'Estimate/' + accessKey + '/Historical', 'postData': postData });
 
         return Promise.resolve(promiseEstimateHistorical).then(function (dataObj) {
             var seriesList = transformKeyFigures(dataObj);
@@ -140,7 +133,7 @@ cision.websolution.estimate.historical = !cision.websolution.settings.estimate ?
             objYAxis = {
                 labels: {
                     formatter: function () {
-                        return cision.websolution.formatHelpers.formatNumber(this.value.toString(), settings.numberFormatOptions.decimalPrecision, settings.numberFormatOptions.decimalSeparator, settings.numberFormatOptions.thousandSeparator);
+                        return window.cision.websolution.formatHelpers.formatNumber(this.value.toString(), settings.numberFormatOptions.decimalPrecision, settings.numberFormatOptions.decimalSeparator, settings.numberFormatOptions.thousandSeparator);
                     }
                 },
                 title: {
@@ -160,7 +153,7 @@ cision.websolution.estimate.historical = !cision.websolution.settings.estimate ?
                     }
                     return '<span style="text-align:center;font-size:130%;"> ' + head + this.series.name + '</span><br/>' +
                         settings.dateString + getDateFormated(this.x) + '<br/>' +
-                        settings.amountString + cision.websolution.formatHelpers.formatNumber(this.y, settings.numberFormatOptions.decimalPrecision, settings.numberFormatOptions.decimalSeparator, settings.numberFormatOptions.thousandSeparator) + ' ' + settings.valueSuffix;
+                        settings.amountString + window.cision.websolution.formatHelpers.formatNumber(this.y, settings.numberFormatOptions.decimalPrecision, settings.numberFormatOptions.decimalSeparator, settings.numberFormatOptions.thousandSeparator) + ' ' + settings.valueSuffix;
                 }
             },
             objPlotOptions = {

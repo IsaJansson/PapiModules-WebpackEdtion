@@ -1,17 +1,11 @@
 // This JavaScript file is created by Cision for our printed material module.
 // Built to be used in combination with printedMaterial.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.printedMaterial = function ($) {
 
-cision.websolution.printedMaterial = function ($) {
-
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = (cision.websolution.settings.printedMaterial || {}).accessKey,
-        texts = cision.websolution.texts[settings.uiLanguage],
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = (window.cision.websolution.settings.printedMaterial || {}).accessKey,
+        texts = window.cision.websolution.texts[settings.uiLanguage],
         itemsList = [],
         categories = [],
         firstRunList = true,
@@ -62,7 +56,7 @@ cision.websolution.printedMaterial = function ($) {
         var postData = getPostData();
 
         if (postData != null) {
-            var promisePrintedMaterial = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey, 'postData': postData });
+            var promisePrintedMaterial = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey, 'postData': postData });
 
             return Promise.resolve(promisePrintedMaterial).then(function (rawData) {
                 $.each(rawData.Items, function (idx, objItem) {
@@ -79,12 +73,12 @@ cision.websolution.printedMaterial = function ($) {
                     texts.Categories = categories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories');
-                    cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
+                    window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
                 }
 
                 var tplElement = '#' + (settings.templateElement || 'tplPrintedMaterialItemListing');
                 var tplTarget = '#' + (settings.outputTargetElement || 'itemListTarget');
-                cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
                 firstRunList = false;
 
@@ -93,14 +87,13 @@ cision.websolution.printedMaterial = function ($) {
     };
 
     var renderArchiveList = function (options) {
-
         if (options) {
             $.extend(settings, options);
         }
         var postData = getPostData();
 
         if (postData != null) {
-            var promisePrintedMaterial = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey + '/Archive', 'postData': postData });
+            var promisePrintedMaterial = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey + '/Archive', 'postData': postData });
 
             return Promise.resolve(promisePrintedMaterial).then(function (rawData) {
                 $.each(rawData.Items, function (idx, objItem) {
@@ -120,12 +113,12 @@ cision.websolution.printedMaterial = function ($) {
                     texts.Categories = categories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories');
-                    cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
+                    window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
                 }
 
                 var tplElement = '#' + (settings.templateElement || 'tplPrintedMaterialArchiveListing');
                 var tplTarget = '#' + (settings.outputTargetElement || 'archiveItemListTarget');
-                cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
                 firstRunArchiveList = false;
 
@@ -146,13 +139,13 @@ cision.websolution.printedMaterial = function ($) {
             return;
         }
 
-        var promiseCalendarEvent = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey + '/ItemDetail?itemguid=' + itemGuid });
+        var promiseCalendarEvent = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Printed material", 'path': 'PrintedMaterial/' + accessKey + '/ItemDetail?itemguid=' + itemGuid });
         return Promise.resolve(promiseCalendarEvent).then(function (objEvent) {
             objResponse.PrintDateFormatted = moment(objResponse.PrintDate).locale(settings.uiLanguage).format(settings.dateFormatOptions.dateFormat);
 
             var tplElement = '#' + (settings.templateElement || 'tplItemDetail');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-item-detail');
-            cision.websolution.common.modelToHtml(objEvent, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objEvent, tplElement, tplTarget);
 
         }).catch(function (err) { console.log(err.message) });
     };
@@ -166,8 +159,8 @@ cision.websolution.printedMaterial = function ($) {
         });
     }
 
-    function retrievePrintedMaterials(pageIndex, pageSize, category) {
-        var printedMaterialPromise = cision.websolution.printedMaterial.renderItemList({
+    var retrievePrintedMaterials = function(pageIndex, pageSize, category) {
+        var printedMaterialPromise = renderItemList({
             PageIndex: pageIndex,
             PageSize: pageSize,
             printedMaterialCategory: category || '',
@@ -233,7 +226,7 @@ cision.websolution.printedMaterial = function ($) {
                         }
                     });
 
-                    $.post(cision.websolution.common.generateUrl('PrintedMaterial/' + accessKey + '/Order'), data)
+                    $.post(window.cision.websolution.common.generateUrl('PrintedMaterial/' + accessKey + '/Order'), data)
                         .done(function (response) {
                             var order = response.Order,
                                 html = '';
@@ -256,11 +249,12 @@ cision.websolution.printedMaterial = function ($) {
             });
         });
     }
-
+    
     return {
         retrievePrintedMaterials: retrievePrintedMaterials,
         getItemByGuid: getItemByGuid,
         renderItemList: renderItemList,
         renderArchiveList: renderArchiveList
     };
+
 }(jQuery);

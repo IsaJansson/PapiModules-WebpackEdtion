@@ -1,15 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.estimate = cision.websolution.estimate || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.estimate.common = !cision.websolution.settings.estimate ? {} : function ($) {
-    var settings = cision.websolution.settings.general;
+window.cision.websolution.estimate.common = function ($) {
+    var settings = window.cision.websolution.settings.general;
 
     function renderEstimateTab(name) {
         //prevent tab rendering if it is already rendered
@@ -19,21 +12,21 @@ cision.websolution.estimate.common = !cision.websolution.settings.estimate ? {} 
 
         switch (name) {
             case "#target-estimate-annual": if (true) {
-                cision.websolution.estimate.annual.render({
+                window.cision.websolution.estimate.annual.render({
                     periodStart: (moment().year() - 2).toString(),
                     periodEnd: moment().year() + 1
                 });
             }
                 break;
             case "#target-estimate-quarterly": if (true) {
-                cision.websolution.estimate.quarterly.render({
+                window.cision.websolution.estimate.quarterly.render({
                     periodStart: (moment().year() - 1).toString() + '-Q1',
                     periodEnd: (moment().year() + 1) + '-Q1'// '2014-Q4'
                 });
             }
                 break;
             case "#target-estimate-historical": if (true) {
-                cision.websolution.estimate.historical.render({
+                window.cision.websolution.estimate.historical.render({
                     chartTitle: 'SALES, MSEK',
                     valuePrefix: '',
                     valueSuffix: ' MSEK',
@@ -45,16 +38,16 @@ cision.websolution.estimate.common = !cision.websolution.settings.estimate ? {} 
             }
                 break;
             case "#target-estimate-recommendations": if (true) {
-                cision.websolution.estimate.recommendations.renderTicker({
+                window.cision.websolution.estimate.recommendations.renderTicker({
                     dateFormat: settings.dateFormatOptions.dateFormat
                 });
-                cision.websolution.estimate.recommendations.renderCurrent({
+                window.cision.websolution.estimate.recommendations.renderCurrent({
                     dateFormat: settings.dateFormatOptions.dateFormat
                 });
             }
                 break;
             case "#target-estimate-historic-recommendations": if (true) {
-                cision.websolution.estimate.recommendations.renderHistory({
+                window.cision.websolution.estimate.recommendations.renderHistory({
                     startDate: moment().subtract(6, 'months').format('YYYY-MM-DD'),
                     endDate: moment().format('YYYY-MM-DD')
                 });

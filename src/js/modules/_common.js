@@ -1,33 +1,16 @@
-// This JavaScript file is created by Cision
-// import _ from "underscore";
-// import moment from "moment";
-// import "jsrender";
-// import "bootstrap";
-// import './bootstrap-datepicker.js';
-// import highcharts from 'highcharts/highstock';
-// import exporting from 'highcharts/modules/exporting';
-// exporting(highcharts);
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-$.support.cors = true;
-
-cision.websolution.translationHelpers = function () {
+window.cision.websolution.translationHelpers = function () {
     function getTranslation(key) {
-        return cision.websolution.texts[cision.websolution.settings.general.uiLanguage][key];
+        return window.cision.websolution.texts[window.cision.websolution.settings.general.uiLanguage][key];
     }
     return {
         getTranslation: getTranslation
     };
 }();
 
-cision.websolution.common = function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        texts = cision.websolution.texts[settings.uiLanguage];
+window.cision.websolution.common = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        texts = window.cision.websolution.texts[settings.uiLanguage];
 
     function generateUrl(path) {
         var url = settings.useProxyHandler
@@ -42,7 +25,7 @@ cision.websolution.common = function ($) {
         if (includeDatepickerSettings) {
             compositeModel = $.extend(compositeModel, GetDatePickerSettings());
         }
-        var helpers = $.extend(cision.websolution.formatHelpers, cision.websolution.translationHelpers);
+        var helpers = $.extend(window.cision.websolution.formatHelpers, window.cision.websolution.translationHelpers);
         var renderedHtml = $(tplElement).render(compositeModel, helpers);
         $(tplTargetElement).html(renderedHtml);
     };

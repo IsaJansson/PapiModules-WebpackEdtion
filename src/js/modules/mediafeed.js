@@ -1,17 +1,11 @@
 ﻿// This JavaScript file is created by Cision for our media feed.
 // Built to be used in combination with media-listing.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.mediafeed = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.mediafeed.accessKey;
 
-cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.mediafeed.accessKey;
-
-    var renderListing = function (options) {
+        var renderListing = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -32,7 +26,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
             tags: settings.tags
         };
 
-        var promiseMediafeed = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed", 'path': 'NewsRoom/' + accessKey + '/Medias', 'postData': postData });
+        var promiseMediafeed = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed", 'path': 'NewsRoom/' + accessKey + '/Medias', 'postData': postData });
 
         return Promise.resolve(promiseMediafeed).then(function (objResponse) {
             var mediaList = { Images: [], Videos: [], Embedded: [], Medias: [] };
@@ -59,7 +53,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
                 // This is a quickfix, when there is time this should be changed in papi instead
                 objResponse.PageIndex = 1;
             }
-            objResponse = cision.websolution.common.setPagingItems(objResponse);
+            objResponse = window.cision.websolution.common.setPagingItems(objResponse);
 
             objResponse.Images = mediaList.Images.reverse();
             objResponse.Medias = mediaList.Medias.reverse();
@@ -68,7 +62,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplMediaList');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-media-list');
-            cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve mediafeed data. ' + err.message) });
     };
@@ -93,7 +87,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
             pageSize: settings.pageSize
         };
 
-        var promiseMediafeedThumbnails = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed thumbnails", 'path': 'NewsRoom/' + accessKey + '/Medias', 'postData': postData });
+        var promiseMediafeedThumbnails = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed thumbnails", 'path': 'NewsRoom/' + accessKey + '/Medias', 'postData': postData });
 
         return Promise.resolve(promiseMediafeedThumbnails).then(function (objResponse) {
             var imagesList = { Images: [] };
@@ -112,7 +106,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplThumbnailList');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-thumbnail');
-            cision.websolution.common.modelToHtml(imagesList, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(imagesList, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve mediafeed thumbnails. ' + err.message) });
     };
@@ -133,7 +127,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
             mainTypes: 'Media'
         };
 
-        var promiseMediafeedTags = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed tags", 'path': 'Newsroom/' + accessKey + '/Tags', 'postData': postData });
+        var promiseMediafeedTags = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Mediafeed tags", 'path': 'Newsroom/' + accessKey + '/Tags', 'postData': postData });
 
         return Promise.resolve(promiseMediafeedTags).then(function (objResponse) {
             var tagList = [];
@@ -147,7 +141,7 @@ cision.websolution.mediafeed = !cision.websolution.settings.mediafeed ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplTags');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-tags');
-            cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve mediafeed tags. ' + err.message) });
     };

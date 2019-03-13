@@ -3,12 +3,11 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
-  entry: ['./src/cision.index.js','./src/cision.modules.js', './src/cision.config.js' ],
+  entry: ['./src/cision.config.js', './src/cision.index.js', './src/cision.modules.js' ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -40,6 +39,23 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+      {
+        test: require.resolve('jquery'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'jQuery'
+        },{
+          loader: 'expose-loader',
+          options: '$'
+        }]
+      },
+      {
+        test: require.resolve('moment'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'moment'
+        }]
       }
     ]
   },
@@ -57,12 +73,10 @@ module.exports = {
       filename: 'insiders.html'
     }),
     new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
-      'jquery': 'jquery',
-      Popper: ['popper.js', 'default']
+      jquery: 'jquery',
+      Popper: ['popper.js', 'default'],
+      moment: "moment"
     }),
-    new WebpackMd5Hash(),
     //new MinifyPlugin()
   ]
 };

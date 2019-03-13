@@ -1,16 +1,10 @@
 ﻿// This JavaScript file is created by Cision for our ownership module.
 // Built to be used in combination with ownership.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.ownership.accessKey,
-        texts = cision.websolution.texts[settings.uiLanguage];
+window.cision.websolution.ownership = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.ownership.accessKey,
+        texts = window.cision.websolution.texts[settings.uiLanguage];
 
     var renderLargestShareholders = function (options) {
         if (options) {
@@ -21,7 +15,7 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
             return;
         }
 
-        var promiseOwnership = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership Largest shareholders", 'path': 'Ownership/' + accessKey });
+        var promiseOwnership = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership Largest shareholders", 'path': 'Ownership/' + accessKey });
 
         return Promise.resolve(promiseOwnership).then(function (rawData) {
             rawData.TotalAmount = rawData.ShareHolders.length;
@@ -32,12 +26,12 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplLargestShareholdersListing');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-largestshareholders');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve ownership data for largest shareholders. ' + err.message) });
     };
 
-    function renderOwnershipTab(name) {
+    var renderOwnershipTab = function(name) {
         //prevent tab rendering if it is already rendered
         if (settings.ownershipTabLoaded[name] != null) {
             return;
@@ -140,14 +134,14 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
             return;
         }
 
-        var promiseOwnership = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership new shareholders", 'path': 'Ownership/' + accessKey + '/NewShareHolders' });
+        var promiseOwnership = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership new shareholders", 'path': 'Ownership/' + accessKey + '/NewShareHolders' });
 
         return Promise.resolve(promiseOwnership).then(function (rawData) {
             rawData.DateFormatted = moment(rawData.Date).format('ll');
 
             var tplElement = '#' + (settings.templateElement || 'tplNewShareholdersListing');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-newshareholders');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve ownership data for new shareholders. ' + err.message) });
     };
@@ -161,14 +155,14 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
             return;
         }
 
-        var promiseOwnership = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership size groups", 'path': 'Ownership/' + accessKey + '/ShareSizeGroups'});
+        var promiseOwnership = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership size groups", 'path': 'Ownership/' + accessKey + '/ShareSizeGroups'});
 
         return Promise.resolve(promiseOwnership).then(function (rawData) {
             rawData.DateFormatted = moment(rawData.Date).format('ll');
 
             var tplElement = '#' + (settings.templateElement || 'tplShareSizeGroupsListing');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-sharesizegroups');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve ownership data for share size groups. ' + err.message) });
     };
@@ -182,7 +176,7 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
             return;
         }
 
-        var promiseOwnership = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership shareholder areas", 'path': 'Ownership/' + accessKey + '/ShareHolderAreas' });
+        var promiseOwnership = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership shareholder areas", 'path': 'Ownership/' + accessKey + '/ShareHolderAreas' });
 
         return Promise.resolve(promiseOwnership).then(function (rawData) {
             // Trying to reorder Areas so that they are translatable
@@ -250,7 +244,7 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplShareShareHolderAreasListing');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-shareholderareas');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve ownership data for shareholder areas. ' + err.message) });
      
@@ -281,7 +275,7 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
             return;
         }
 
-        var promiseOwnership = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership largest grouped shareholders", 'path': 'Ownership/' + accessKey + '/LargestGroupedShareHolders' });
+        var promiseOwnership = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ownership largest grouped shareholders", 'path': 'Ownership/' + accessKey + '/LargestGroupedShareHolders' });
 
         return Promise.resolve(promiseOwnership).then(function (rawData) {
             rawData.TotalAmount = rawData.ShareHolders.length;
@@ -292,7 +286,7 @@ cision.websolution.ownership = !cision.websolution.settings.ownership ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'tplLargestShareholdersListing');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-largestgroupedshareholders');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve ownership data for largest grouped shareholders. ' + err.message) });
     };

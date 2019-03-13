@@ -1,13 +1,7 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.dividend = !cision.websolution.settings.ticker ? {} : function ($) {
+cision.websolution.dividend = function ($) {
     var settings = cision.websolution.settings.general;
     var accessKey = cision.websolution.settings.ticker.accessKey;
 

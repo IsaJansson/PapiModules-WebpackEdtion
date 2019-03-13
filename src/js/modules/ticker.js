@@ -1,18 +1,12 @@
 // This JavaScript file is created by Cision for our ticker module.
 // Built to be used in combination with sharegraph.html, tickerLarge.html or tickerSmall.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.tickers = function($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.ticker.accessKey,
+        texts = window.cision.websolution.texts[settings.uiLanguage];
 
-cision.websolution.tickers = !cision.websolution.settings.ticker ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.ticker.accessKey,
-        texts = cision.websolution.texts[settings.uiLanguage];
-
-    var render = function (options) {
+        var render = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -22,8 +16,8 @@ cision.websolution.tickers = !cision.websolution.settings.ticker ? {} : function
         }
 
         // fetch the data
-        var promiseTicker = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker", 'path': 'Ticker/' + accessKey });
-        var promiseSharePerformance = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker performance", 'path': 'Ticker/' + accessKey + '/Performance' });
+        var promiseTicker = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker", 'path': 'Ticker/' + accessKey });
+        var promiseSharePerformance = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker performance", 'path': 'Ticker/' + accessKey + '/Performance' });
     
         Promise.all([promiseTicker, promiseSharePerformance])
             .then(function (results) {
@@ -111,7 +105,7 @@ cision.websolution.tickers = !cision.websolution.settings.ticker ? {} : function
                 
                 var tplElement = '#' + (settings.templateElement || 'templateTicker');
                 var tplTarget = '#' + (settings.outputTargetElement || 'target-ticker');
-                cision.websolution.common.modelToHtml(data, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(data, tplElement, tplTarget);
                
             })
             .catch(function (err) {

@@ -1,10 +1,8 @@
 ﻿import "jquery-number";
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
 
-cision.websolution.formatHelpers.formatNumber = function (inputNumber, decimalPrecision, decimalSeparator, thousandSeparator) {
+window.cision.websolution.formatHelpers.formatNumber = function (inputNumber, decimalPrecision, decimalSeparator, thousandSeparator) {
     // Uses https://github.com/customd/jquery-number
     //      function( number, decimals, dec_point, thousands_sep )
 
@@ -12,7 +10,7 @@ cision.websolution.formatHelpers.formatNumber = function (inputNumber, decimalPr
         return inputNumber;
     }
 
-    var defaultOptions = cision.websolution.settings.general.numberFormatOptions || {};
+    var defaultOptions = window.cision.websolution.settings.general.numberFormatOptions || {};
 
     // Remark: following is to make sure that ZERO is treated as such for decimalPrecision
     if (typeof decimalPrecision === 'undefined' || decimalPrecision === null) {
@@ -50,12 +48,12 @@ cision.websolution.formatHelpers.formatNumber = function (inputNumber, decimalPr
     return formattedNumber;
 };
 
-cision.websolution.formatHelpers.formatCurrency = function (inputNumber, prefix, suffix) {
+window.cision.websolution.formatHelpers.formatCurrency = function (inputNumber, prefix, suffix) {
     if (typeof inputNumber === 'undefined' || inputNumber === null) {
         return inputNumber;
     }
 
-    var formattedNumber = cision.websolution.formatHelpers.formatNumber(inputNumber);
+    var formattedNumber = window.cision.websolution.formatHelpers.formatNumber(inputNumber);
 
     if (typeof formattedNumber === 'undefined' || formattedNumber === null) {
         return formattedNumber;
@@ -64,23 +62,23 @@ cision.websolution.formatHelpers.formatCurrency = function (inputNumber, prefix,
     return (prefix || '') + formattedNumber + (suffix || '');
 };
 
-cision.websolution.formatHelpers.formatDate = function (input, dateFormat) {
+window.cision.websolution.formatHelpers.formatDate = function (input, dateFormat) {
 
-    var defaultOptions = cision.websolution.settings.general.dateFormatOptions || {};
+    var defaultOptions = window.cision.websolution.settings.general.dateFormatOptions || {};
 
     return moment(input).format(dateFormat || defaultOptions.dateFormat || 'DD MMM YYYY');
 };
 
-cision.websolution.formatHelpers.formatTime = function (input, timeFormat) {
+window.cision.websolution.formatHelpers.formatTime = function (input, timeFormat) {
 
-    var defaultOptions = cision.websolution.settings.general.dateFormatOptions || {};
+    var defaultOptions = window.cision.websolution.settings.general.dateFormatOptions || {};
 
     return moment(input).format(timeFormat || defaultOptions.timeFormat || 'HH:mm');
 };
 
-cision.websolution.formatHelpers.formatDateTime = function (input, dateTimeFormat) {
+window.cision.websolution.formatHelpers.formatDateTime = function (input, dateTimeFormat) {
 
-    var defaultOptions = cision.websolution.settings.general.dateFormatOptions || {};
+    var defaultOptions = window.cision.websolution.settings.general.dateFormatOptions || {};
 
     return moment(input).format(dateTimeFormat || defaultOptions.dateTimeFormat || 'DD MMM YYYY HH:mm');
 };

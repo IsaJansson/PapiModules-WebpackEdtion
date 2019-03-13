@@ -1,18 +1,11 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.estimate = cision.websolution.estimate || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.estimate.quarterly = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.estimate.accessKey;
 
-cision.websolution.estimate.quarterly = !cision.websolution.settings.estimate ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.estimate.accessKey;
-
-    var render = function (options) {
+        function render(options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -21,7 +14,7 @@ cision.websolution.estimate.quarterly = !cision.websolution.settings.estimate ? 
             return;
         }
 
-        var promiseEstimateQuarterly = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate quarterly", 'path': 'Estimate/' + accessKey + '/Quarterly' });
+        var promiseEstimateQuarterly = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate quarterly", 'path': 'Estimate/' + accessKey + '/Quarterly' });
 
         return Promise.resolve(promiseEstimateQuarterly).then(function (dataObj) {
             var periodList = transformKeyFigures(dataObj.QuarterlyKeyFigures);
@@ -36,7 +29,7 @@ cision.websolution.estimate.quarterly = !cision.websolution.settings.estimate ? 
 
             var tplElement = '#' + (settings.templateElement || 'template-estimate-quarterly');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-estimate-quarterly');
-            cision.websolution.common.modelToHtml({ PeriodList: periodList }, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml({ PeriodList: periodList }, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve quarterly estimates data. ' + err.message) });
     };

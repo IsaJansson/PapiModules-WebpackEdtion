@@ -1,17 +1,10 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.estimate = cision.websolution.estimate || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.estimate.recommendations = !cision.websolution.settings.estimate ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.estimate.accessKey,
-        accessKeyTicker = cision.websolution.settings.estimate.accessKeyTicker;
+window.cision.websolution.estimate.recommendations = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.estimate.accessKey,
+        accessKeyTicker = window.cision.websolution.settings.estimate.accessKeyTicker;
 
     var renderHistory = function (options) {
         if (options) {
@@ -27,7 +20,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
             field: settings.field
         };
 
-        var promiseEstimateHistoricalRecommendations = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey + '/RecommendationsHistorical', 'postData': postData });
+        var promiseEstimateHistoricalRecommendations = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey + '/RecommendationsHistorical', 'postData': postData });
 
         return Promise.resolve(promiseEstimateHistoricalRecommendations).then(function (objRawData) {
             var objGroupedData = groupByMonth(objRawData);
@@ -48,7 +41,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
 
             var tplElement = '#' + (settings.templateElement || 'template-recommendations-history-table');
             var tplTarget = '#' + (settings.outputTargetElement || 'historicRecommendation');
-            cision.websolution.common.modelToHtml(objGroupedData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objGroupedData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve historical estimates recommendations data. ' + err.message) });
     };
@@ -62,7 +55,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
             return;
         }
 
-        var promiseEstimateCurrentRecommendations = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey + '/Recommendations' });
+        var promiseEstimateCurrentRecommendations = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey + '/Recommendations' });
 
         return Promise.resolve(promiseEstimateCurrentRecommendations).then(function (objRawData) {
             var lastDate = "2000-01-01";
@@ -99,7 +92,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
 
             var tplElement = '#' + (settings.templateElement || 'tplCurrentRecommendationDistribution');
             var tplTarget = '#' + (settings.outputTargetElement || 'currentRecommendationDistribution');
-            cision.websolution.common.modelToHtml(objRawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objRawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve estimate recommendations data. ' + err.message) });
     };
@@ -113,7 +106,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
             return;
         }
 
-        var promiseEstimateShareData = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate share information", 'path': 'Ticker/' + accessKeyTicker });
+        var promiseEstimateShareData = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate share information", 'path': 'Ticker/' + accessKeyTicker });
 
         return Promise.resolve(promiseEstimateShareData).then(function (rawData) {
             var objInstrument = rawData.Instruments[0],
@@ -134,7 +127,7 @@ cision.websolution.estimate.recommendations = !cision.websolution.settings.estim
 
             var tplElement = '#' + (settings.templateElement || 'tplShareInformation');
             var tplTarget = '#' + (settings.outputTargetElement || 'shareinformation');
-            cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve estimate ticker data. ' + err.message) });
     };

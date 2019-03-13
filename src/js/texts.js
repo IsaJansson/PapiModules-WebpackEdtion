@@ -1,12 +1,13 @@
 ﻿// This JavaScript file is created by Cision for all our modules.
 // This is the first version of this file so far.
 // This file works as a dictionary for all the modules and could be combined with all of them.
+window.cision = window.cision || {};
+window.cision.websolution = window.cision.websolution || {};
+window.cision.websolution.texts = window.cision.websolution.texts || {};
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
+$.support.cors = true;
 
-cision.websolution.texts["sv"] = {
+window.cision.websolution.texts["sv"] = {
     // sharegraph translations
     TextComparison: "Jämförelser",
     TextIndicator: "Indikatorer",
@@ -205,7 +206,7 @@ cision.websolution.texts["sv"] = {
 //EPS = Vinst per aktie
 //EBIT = Rörelseresultat
 
-cision.websolution.texts["en"] = {
+window.cision.websolution.texts["en"] = {
     // Sharegraph translations
     TextComparison: "Comparisons",
     TextIndicator: "Indicators",
@@ -403,7 +404,7 @@ cision.websolution.texts["en"] = {
 
 // dk, fi, no and de translations is not complete.
 
-cision.websolution.texts["dk"] = {
+window.cision.websolution.texts["dk"] = {
     // Sharegraph translations
     TextComparison: "Sammenligninger",
     TextIndicator: "Indikatorer",
@@ -598,7 +599,7 @@ cision.websolution.texts["dk"] = {
     TextPrintOrderSuccess: "You have now ordered the following items: "
 };
 
-cision.websolution.texts["no"] = {
+window.cision.websolution.texts["no"] = {
     // Sharegraph translations
     TextComparison: "Sammenligninger",
     TextIndicator: "Indikatorer",
@@ -793,7 +794,7 @@ cision.websolution.texts["no"] = {
     TextPrintOrderSuccess: "You have now ordered the following items: "
 };
 
-cision.websolution.texts["fi"] = {
+window.cision.websolution.texts["fi"] = {
     // Sharegraph translations
     TextComparison: "Vertailut",
     TextIndicator: "Indikaattorit",
@@ -986,7 +987,7 @@ cision.websolution.texts["fi"] = {
     TextPrintOrderSuccess: "You have now ordered the following items: "
 };
 
-cision.websolution.texts["de"] = {
+window.cision.websolution.texts["de"] = {
     // Sharegraph translations
     TextComparison: "Vergleiche",
     TextIndicator: "Indikatoren",
@@ -1262,7 +1263,7 @@ if ($.fn.datepicker) {
 
 /********* Calendar texts **************/
 
-cision.websolution.texts["fi"].calendarTexts = {
+window.cision.websolution.texts["fi"].calendarTexts = {
     weekdays: ['sunnuntai', 'maanantai', 'tiistai', 'keskiviikko', 'torstai', 'perjantai', 'lauantai'],
     months: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu'],
     shortMonths: ['tammi', 'helmi', 'maalis', 'huhti', 'touko', 'kesä', 'heinä', 'elo', 'syys', 'loka', 'marras', 'joulu'],
@@ -1276,7 +1277,7 @@ cision.websolution.texts["fi"].calendarTexts = {
     source: ['Source']
 };
 
-cision.websolution.texts["en"].calendarTexts = {
+window.cision.websolution.texts["en"].calendarTexts = {
     weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -1290,7 +1291,7 @@ cision.websolution.texts["en"].calendarTexts = {
     source: ['Source']
 };
 
-cision.websolution.texts["sv"].calendarTexts = {
+window.cision.websolution.texts["sv"].calendarTexts = {
     weekdays: ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
     months: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'],
     shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
@@ -1307,7 +1308,7 @@ cision.websolution.texts["sv"].calendarTexts = {
 
 /********* Insider specific texts. Needed for insider transactions and sharegraph with insiders as indicators **************/
 
-cision.websolution.texts["sv"].insidersDescriptions = function () {
+window.cision.websolution.texts["sv"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];
@@ -1441,7 +1442,7 @@ cision.websolution.texts["sv"].insidersDescriptions = function () {
 }(jQuery);
 
 
-cision.websolution.texts["en"].insidersDescriptions = function () {
+window.cision.websolution.texts["en"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];
@@ -1574,7 +1575,7 @@ cision.websolution.texts["en"].insidersDescriptions = function () {
     };
 }(jQuery);
 
-cision.websolution.texts["fi"].insidersDescriptions = function () {
+window.cision.websolution.texts["fi"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];
@@ -1707,7 +1708,7 @@ cision.websolution.texts["fi"].insidersDescriptions = function () {
     };
 }(jQuery);
 
-cision.websolution.texts["no"].insidersDescriptions = function () {
+window.cision.websolution.texts["no"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];
@@ -1840,7 +1841,7 @@ cision.websolution.texts["no"].insidersDescriptions = function () {
     };
 }(jQuery);
 
-cision.websolution.texts["dk"].insidersDescriptions = function () {
+window.cision.websolution.texts["dk"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];
@@ -1973,7 +1974,7 @@ cision.websolution.texts["dk"].insidersDescriptions = function () {
     };
 }(jQuery);
 
-cision.websolution.texts["de"].insidersDescriptions = function () {
+window.cision.websolution.texts["de"].insidersDescriptions = function () {
     var transactionTypes = [];
     var positionTypes = [];
     var holderTypes = [];

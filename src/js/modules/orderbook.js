@@ -1,17 +1,11 @@
 ﻿// This JavaScript file is created by Cision for our orderbook module.
 // Built to be used in combination with orderbook.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.orderbook = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.orderbook.accessKey;
 
-cision.websolution.orderbook = !cision.websolution.settings.orderbook ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.orderbook.accessKey;
-
-    var render = function (options) {
+        window.cision.websolution.orderbook.render = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -20,7 +14,7 @@ cision.websolution.orderbook = !cision.websolution.settings.orderbook ? {} : fun
             return;
         }
 
-        var promiseTickerTrades = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Orderbook", 'path': 'OrderBook/' + accessKey + '/Items' });
+        var promiseTickerTrades = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Orderbook", 'path': 'OrderBook/' + accessKey + '/Items' });
 
         return Promise.resolve(promiseTickerTrades).then(function (dataObj) {
             var objInstrument = dataObj.Instruments[0],
@@ -40,7 +34,7 @@ cision.websolution.orderbook = !cision.websolution.settings.orderbook ? {} : fun
 
             var tplElement = '#' + (settings.templateElement || 'templateorderbook');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-orderbook');
-            cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve orderbook data. ' + err.message) });
     };

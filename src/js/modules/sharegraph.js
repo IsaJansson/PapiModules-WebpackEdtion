@@ -1,15 +1,9 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.sharegraph.accessKey,
+window.cision.websolution.sharegraph = function($){
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.sharegraph.accessKey,
         showVolume = false,
         today = moment().format('YYYY-MM-DD'),
         typeOfChart = "endOfDay",
@@ -17,7 +11,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         actions = [],
         $chartContainer;
 
-    function init(options) {
+    var init = function(options) {
         settings.endOfDayStartFrom = moment().subtract(6, 'months').format('YYYY-MM-DD'); // we default to displaying 6 months
         settings.endOfDayEndTime = moment().format('YYYY-MM-DD');
 
@@ -31,7 +25,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
             // render sharegraph wrapper for the extra elements
             var tplElement = '#' + (settings.templateElement || 'templatesharegraph');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-sharegraph-wrapper');
-            cision.websolution.common.modelToHtml({}, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml({}, tplElement, tplTarget);
 
             // set up our custom time periods and events
             initializeDatepickers();
@@ -42,10 +36,10 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
             sharegraphPrintFix();
 
             // render extras
-            cision.websolution.tickers.render();
-            cision.websolution.trades.render();
-            cision.websolution.performance.render();
-            cision.websolution.orderbook.render();
+            window.cision.websolution.tickers.render();
+            window.cision.websolution.trades.render();
+            window.cision.websolution.performance.render();
+            window.cision.websolution.orderbook.render();
         }
 
         showEndOfDay();
@@ -175,7 +169,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
             });
 
             window.open(
-                settings.serviceEndpoint + "ShareHistory/" + cision.websolution.settings.sharegraph.shareHistoryKey + "/csv?indexSymbols=" + listOfTickers + "&mainInstrument=" + settings.mainInstruments[0].symbol,
+                settings.serviceEndpoint + "ShareHistory/" + window.cision.websolution.settings.sharegraph.shareHistoryKey + "/csv?indexSymbols=" + listOfTickers + "&mainInstrument=" + settings.mainInstruments[0].symbol,
                 "exeldownload",
                 ""
             );
@@ -187,7 +181,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         $('#share-options-select .show-hide-instrument').on('click', function () {
             if (!$(this).hasClass("cision-disabled")) {
                 $(this).toggleClass("selected");
-                updateInstrumentSeries($(this));
+                window.cision.websolution.updateInstrumentSeries($(this));
             }
         });
         $('#share-options-select .chartComparisonType').on('click', function (event) {
@@ -306,9 +300,9 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         return color;
     };
 
-    function showEndOfDay() {
+    function  showEndOfDay() {
         typeOfChart = "endOfDay";
-        var proimiseEndOfDay = cision.websolution.sharegraph.render({
+        var proimiseEndOfDay = render({
             volumeOffset: -35,
             showVolume: showVolume,
             typeOfChart: 'EndOfDay',
@@ -330,7 +324,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         });
     }
 
-    function showPartOfDay() {
+    function  showPartOfDay() {
         typeOfChart = "partOfDay";
         var daysBack = 1;
 
@@ -343,7 +337,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         settings.endOfDayStartFrom = moment().subtract(daysBack, 'days').format('YYYY-MM-DD');
         settings.endOfDayEndTime = today;
 
-        var promisePartOfDay = cision.websolution.sharegraph.render({
+        var promisePartOfDay = render({
             dateToStartFrom: settings.endOfDayStartFrom,
             dateToEnd: null,
             typeOfChart: 'PartOfDay',
@@ -361,7 +355,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         });
     }
 
-    function reinitializeState() {
+    var reinitializeState = function() {
         $chartContainer = $('#' + settings.chartContainerId);
 
         $('.show-hide-instrument')
@@ -373,7 +367,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
 
     var triggerAutomaticComparison = 0;
     /* This will be incremented for every peer-or-index added (decremented when removed) */
-    function updateInstrumentSeries(element) {
+    var updateInstrumentSeries = function(element) {
         var $el = $(element);
         var objChart = $chartContainer.highcharts();
         var uniqueKey = $el.data("key");
@@ -480,7 +474,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
 
         if (!isFound) {
             // Add as new instrument
-            cision.websolution.dividend.renderToGraph(objChart,
+            window.cision.websolution.dividend.renderToGraph(objChart,
                 {
                     startDate: startDate,
                     dividendsUniqueKey: uniqueKey
@@ -501,7 +495,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
             });
 
         if (!isFound) {
-            cision.websolution.insiders.renderToGraph(objChart,
+            window.cision.websolution.insiders.renderToGraph(objChart,
                 {
                     startDate: startDate,
                     insidersUniqueKey: uniqueKey
@@ -552,7 +546,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
     function showReleasesOnChart(uniqueKey) {
         var objChart = $chartContainer.highcharts();
 
-        var promiseGraphReleases = cision.websolution.common.getModuleData({
+        var promiseGraphReleases = window.cision.websolution.common.getModuleData({
             'accessKey': accessKey, 'module': "Share releases", 'path': 'Share/' + accessKey + '/Releases', 'postData': {
                 startDate: settings.dateToStartFrom
             }
@@ -562,7 +556,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
             $.each(releaseData.Releases, function (idxIns, objReleasePackage) {
                 var isVisible = objReleasePackage.Name == uniqueKey ? true : false;
                 if (isVisible) {
-                    var releaseSettings = cision.websolution.common.getIndicatorSettings(uniqueKey);
+                    var releaseSettings = window.cision.websolution.common.getIndicatorSettings(uniqueKey);
                     // This used in finding which series we are dealing with 
                     objReleasePackage.UniqueKey = objReleasePackage.Name;
 
@@ -629,7 +623,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
 
     // this method can be used directly if none of our custom elements (actions, datepickers, downloads etc.) are needed
     // if so some settings will be required in the options object to get highcharts own implementation of the above elements
-    function render(options) {
+    var render = function(options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -644,7 +638,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         };
 
         // fetch the data
-        var promiseSharegraph = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Sharegraph", 'path': 'Share/' + accessKey, 'postData': postData });
+        var promiseSharegraph = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Sharegraph", 'path': 'Share/' + accessKey, 'postData': postData });
 
         return Promise.resolve(promiseSharegraph).then(function (shareData) {
             var seriesList = [],
@@ -909,17 +903,17 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
         Highcharts.setOptions({
             lang: {
                 rangeSelectorZoom: '',
-                contextButtonTitle: cision.websolution.texts[settings.uiLanguage].TextDownload || 'Download',
-                months: cision.websolution.texts[settings.uiLanguage].calendarTexts['months'],
-                weekdays: cision.websolution.texts[settings.uiLanguage].calendarTexts['weekdays'],
-                shortMonths: cision.websolution.texts[settings.uiLanguage].calendarTexts['shortMonths'],
-                rangeSelectorFrom: cision.websolution.texts[settings.uiLanguage].calendarTexts['rangeSelectorFrom'],
-                rangeSelectorTo: cision.websolution.texts[settings.uiLanguage].calendarTexts['rangeSelectorTo'],
-                downloadJPEG: cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadJPEG'],
-                downloadPDF: cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadPDF'],
-                downloadPNG: cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadPNG'],
-                downloadSVG: cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadSVG'],
-                printChart: cision.websolution.texts[settings.uiLanguage].calendarTexts['printChart']
+                contextButtonTitle: window.cision.websolution.texts[settings.uiLanguage].TextDownload || 'Download',
+                months: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['months'],
+                weekdays: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['weekdays'],
+                shortMonths: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['shortMonths'],
+                rangeSelectorFrom: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['rangeSelectorFrom'],
+                rangeSelectorTo: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['rangeSelectorTo'],
+                downloadJPEG: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadJPEG'],
+                downloadPDF: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadPDF'],
+                downloadPNG: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadPNG'],
+                downloadSVG: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['downloadSVG'],
+                printChart: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['printChart']
             }
         });
 
@@ -955,7 +949,7 @@ cision.websolution.sharegraph = !cision.websolution.settings.sharegraph ? {} : f
                 }
             },
             credits: {
-                text: cision.websolution.translationHelpers.getTranslation("TextDelayInfo") + " " + cision.websolution.translationHelpers.getTranslation("TextCredits"),
+                text: window.cision.websolution.translationHelpers.getTranslation("TextDelayInfo") + " " + window.cision.websolution.translationHelpers.getTranslation("TextCredits"),
                 href: ''
             },
 

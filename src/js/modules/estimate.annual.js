@@ -1,16 +1,9 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.estimate = cision.websolution.estimate || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.estimate.annual = !cision.websolution.settings.estimate ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.estimate.accessKey;
+window.cision.websolution.estimate.annual = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.estimate.accessKey;
 
     var render = function (options) {
         if (options) {
@@ -21,7 +14,7 @@ cision.websolution.estimate.annual = !cision.websolution.settings.estimate ? {} 
             return;
         }
 
-        var promiseDividend = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey});
+        var promiseDividend = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Estimate", 'path': 'Estimate/' + accessKey});
 
         return Promise.resolve(promiseDividend).then(function (dataObj) {
             var periodList = transformKeyFigures(dataObj.AnnualKeyFigures);
@@ -35,7 +28,7 @@ cision.websolution.estimate.annual = !cision.websolution.settings.estimate ? {} 
 
             var tplElement = '#' + (settings.templateElement || 'template-estimate-annual');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-estimate-annual');
-            cision.websolution.common.modelToHtml({ PeriodList: periodList }, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml({ PeriodList: periodList }, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve annual estimate data. ' + err.message) });
     };

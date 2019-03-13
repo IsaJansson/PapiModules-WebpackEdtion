@@ -1,19 +1,12 @@
 ﻿// This JavaScript file is created by Cision for our sharecalculator module.
 // Built to be used in combination with sharecalculator.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.sharecalculator = function($) {
 
-cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculator ? {} : function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general);
+    var accessKey = window.cision.websolution.settings.sharecalculator.accessKey;
+    var texts = window.cision.websolution.texts[settings.uiLanguage];
 
-    var settings = $.extend({}, cision.websolution.settings.general);
-    var accessKey = cision.websolution.settings.sharecalculator.accessKey;
-    var texts = cision.websolution.texts[settings.uiLanguage];
-
-    
     var renderCalculator = function (options) {
         if (options) {
             $.extend(settings, options);
@@ -29,7 +22,7 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
             quoteType: settings.typeOfCalclator
 
         };
-        var promiseShareCalculator = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share calculator", 'path': 'ShareCalculator/' + accessKey, 'postData': postData });
+        var promiseShareCalculator = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share calculator", 'path': 'ShareCalculator/' + accessKey, 'postData': postData });
 
         Promise.resolve(promiseShareCalculator).then(function (calculatorData) {
             if (calculatorData.Instruments.length > 0) {
@@ -71,16 +64,16 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
         calculatorData.Instruments[0].Checked = true;
         var tplElementShareType = '#' + (settings.templateElementShareType || 'template-sharecalclulator-sharetype');
         var tplTargetShareType = '#' + (settings.outputTargetElementShareType || 'sharecalclulator-sharetype-container');
-        cision.websolution.common.modelToHtml({ Instruments: calculatorData.Instruments }, tplElementShareType, tplTargetShareType);
+        window.cision.websolution.common.modelToHtml({ Instruments: calculatorData.Instruments }, tplElementShareType, tplTargetShareType);
 
         var tplElement = '#' + (settings.templateElement || 'template-sharecalclulator');
         var tplTarget = '#' + (settings.outputTargetElement || 'sharecalclulator-container');
-        cision.websolution.common.modelToHtml({ Instruments: calculatorData.Instruments }, tplElement, tplTarget, true);
+        window.cision.websolution.common.modelToHtml({ Instruments: calculatorData.Instruments }, tplElement, tplTarget, true);
 
         InitSettingsChanged();
     }
 
-    function compute() {
+    var compute = function() {
         var resultsModel = $.extend(texts, settings);
         var historyModel = $.extend(texts, settings);
 
@@ -103,7 +96,7 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
             quoteType: settings.typeOfCalclator
 
         };
-        var promiseShareCalculatorComputed = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share calculator", 'path': 'ShareCalculator/' + accessKey, 'postData': postData });
+        var promiseShareCalculatorComputed = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Share calculator", 'path': 'ShareCalculator/' + accessKey, 'postData': postData });
 
         Promise.resolve(promiseShareCalculatorComputed).then(function (calculatorData) {
             //get first bcasue we filtered by ticker symbol in backend
@@ -119,7 +112,7 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
 
             var tplElement = '#' + (settings.templateElement || 'template-sharecalclulator-results');
             var tplTarget = '#' + (settings.outputTargetElement || 'sharecalclulator-results-container');
-            cision.websolution.common.modelToHtml(resultsModel, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(resultsModel, tplElement, tplTarget);
 
             //show history quetes
             var history = GetShareHistory(instrument.Quotes);
@@ -129,7 +122,7 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
 
             var tplElementShareHistory = '#' + (settings.templateElementShareHistory || 'template-sharecalclulator-history');
             var tplTargetShareHistory = '#' + (settings.outputTargetElementShareHistory || 'sharecalclulator-history-container');
-            cision.websolution.common.modelToHtml(historyModel, tplElementShareHistory, tplTargetShareHistory);
+            window.cision.websolution.common.modelToHtml(historyModel, tplElementShareHistory, tplTargetShareHistory);
         });
     };
 
@@ -272,7 +265,7 @@ cision.websolution.sharecalculator = !cision.websolution.settings.sharecalculato
         }
     }
 
-    function exportCsv() {
+    var exportCsv = function() {
         var shareType = $("#sharecalclulator-sharetype-container input[type='radio']:checked").val();
         var startDate = $("#shareCalculatorStartYear").val() + $("#shareCalculatorStartMonth").val() + $("#shareCalculatorStartDay").val();
         var endDate = $("#shareCalculatorEndYear").val() + $("#shareCalculatorEndMonth").val() + $("#shareCalculatorEndDay").val();

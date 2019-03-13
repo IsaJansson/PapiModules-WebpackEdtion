@@ -1,17 +1,11 @@
 ﻿// This JavaScript file is created by Cision for our newsfeed.
 // Built to be used in combination with relese.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.newsfeed =  function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.newsfeed.accessKey;
 
-cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.newsfeed.accessKey;
-
-    var renderListing = function (options) {
+        var renderListing = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -34,7 +28,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
             regulatory: settings.regulatory
         };
 
-        var promiseNewsfeed = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed", 'path': 'NewsFeed/' + accessKey + '/Releases', 'postData': postData });
+        var promiseNewsfeed = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed", 'path': 'NewsFeed/' + accessKey + '/Releases', 'postData': postData });
 
         return Promise.resolve(promiseNewsfeed).then(function (objResponse) {
             var objFirstRelease = null,
@@ -80,22 +74,22 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
 
             objResponse.Releases = releaseList;
 
-            objResponse = cision.websolution.common.setPagingItems(objResponse);
+            objResponse = window.cision.websolution.common.setPagingItems(objResponse);
 
             // render first release
             if (settings.separateFirstRelease === true) {
                 var tplElementTopRelease = '#' + (settings.templateElement || 'tplTopRelease');
                 var tplTargetTopRelease = '#' + (settings.outputTargetElement || 'target-release-top');
-                cision.websolution.common.modelToHtml(objFirstRelease, tplElementTopRelease, tplTargetTopRelease);
+                window.cision.websolution.common.modelToHtml(objFirstRelease, tplElementTopRelease, tplTargetTopRelease);
             }
 
             // render release list
             var tplElement = '#' + (settings.templateElement || 'tplReleaseList');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-release-list');
-            cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
 
             if (releaseList.length < 1 && objFirstRelease === null) {
-                cision.websolution.common.modelToHtml({}, "#tplnosearchResult", '#noSearchresult-container');
+                window.cision.websolution.common.modelToHtml({}, "#tplnosearchResult", '#noSearchresult-container');
                 $('#noSearchresult-container').show();
             } else {
                 $('#noSearchresult-container').hide();
@@ -120,7 +114,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
             startYear: settings.newsfeedYearsStartYear
         };
 
-        var promiseYears = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed years", 'path': 'NewsFeed/' + accessKey + '/Years', 'postData': postData });
+        var promiseYears = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed years", 'path': 'NewsFeed/' + accessKey + '/Years', 'postData': postData });
 
         return Promise.resolve(promiseYears).then(function (objResponse) {
             var yearList = [];
@@ -134,7 +128,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
 
             var tplElement = '#' + (settings.templateElement || 'tplArchive');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-archive');
-            cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve newsfeed years data. ' + err.message) });
     };
@@ -151,7 +145,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
             return;
         }
 
-        var promiseReleaseDetail = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Release detail", 'path': 'Release/' + settings.releaseIdentifier + '/Detail' });
+        var promiseReleaseDetail = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Release detail", 'path': 'Release/' + settings.releaseIdentifier + '/Detail' });
 
         return Promise.resolve(promiseReleaseDetail).then(function (objResponse) {
             var objRelease = objResponse.Release;
@@ -169,7 +163,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
 
             var tplElement = '#' + (settings.templateElement || 'tplReleaseDetail');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-release-detail');
-            cision.websolution.common.modelToHtml(objRelease, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objRelease, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve release details. ' + err.message) });
     };
@@ -190,35 +184,35 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
             siteKey: settings.siteKey
         };
 
-        var promiseNewsroomContent = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsroom content", 'path': 'NewsRoom/' + accessKey, 'postData': postData });
+        var promiseNewsroomContent = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsroom content", 'path': 'NewsRoom/' + accessKey, 'postData': postData });
 
         return Promise.resolve(promiseNewsroomContent).then(function (objResponse) {
             var $tplNewsroomAbout = $("#tplNewsroomAbout");
             var $targetNewsroomAbout = $("#target-newsroom-about");
 
             if ($tplNewsroomAbout.length && $targetNewsroomAbout.length) {
-                cision.websolution.common.modelToHtml(objResponse, $tplNewsroomAbout, $targetNewsroomAbout);
+                window.cision.websolution.common.modelToHtml(objResponse, $tplNewsroomAbout, $targetNewsroomAbout);
             }
 
             var $tplLogoUrl = $("#tplNewsroomLogoUrl");
             var $targetLogoUrl = $("#target-newsroom-logo");
 
             if ($tplLogoUrl.length && $targetLogoUrl.length) {
-                cision.websolution.common.modelToHtml(objResponse, $tplLogoUrl, $targetLogoUrl);
+                window.cision.websolution.common.modelToHtml(objResponse, $tplLogoUrl, $targetLogoUrl);
             }
 
             var $tplNewsroomContactListDetail = $("#tplNewsroomContactListDetail");
             var $targetNewsroomContactListDetail = $("#target-newsroom-contact-list-detail");
 
             if ($tplNewsroomContactListDetail.length && $targetNewsroomContactListDetail.length) {
-                cision.websolution.common.modelToHtml(objResponse, $tplNewsroomContactListDetail, $targetNewsroomContactListDetail);
+                window.cision.websolution.common.modelToHtml(objResponse, $tplNewsroomContactListDetail, $targetNewsroomContactListDetail);
             }
 
             var $tplNewsroomContactListSidebar = $("#tplNewsroomContactListSidebar");
             var $targetNewsroomContactListSidebar = $("#target-newsroom-contact-list-sidebar");
 
             if ($tplNewsroomContactListSidebar.length && $targetNewsroomContactListSidebar.length) {
-                cision.websolution.common.modelToHtml(objResponse, $tplNewsroomContactListSidebar, $targetNewsroomContactListSidebar);
+                window.cision.websolution.common.modelToHtml(objResponse, $tplNewsroomContactListSidebar, $targetNewsroomContactListSidebar);
             }
 
         }).catch(function (err) { console.log('Could not retrieve newsroom content. ' + err.message) });
@@ -241,7 +235,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
             pageSize: 100
         };
 
-        var promiseTags = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed tags", 'path': 'Newsroom/' + accessKey + '/Tags', 'postData': postData });
+        var promiseTags = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Newsfeed tags", 'path': 'Newsroom/' + accessKey + '/Tags', 'postData': postData });
 
         return Promise.resolve(promiseTags).then(function (objResponse) {
             var tagList = [];
@@ -255,7 +249,7 @@ cision.websolution.newsfeed = !cision.websolution.settings.newsfeed ? {} : funct
 
             var tplElement = '#' + (settings.templateElement || 'tplTags');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-tags');
-            cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objResponse, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve newsfeed tags. ' + err.message) });
     };

@@ -1,16 +1,10 @@
 ﻿// This JavaScript file is created by Cision for our calendar module.
 // Built to be used in combination with calendar.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
-
-cision.websolution.calendar = function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = (cision.websolution.settings.calendar || {}).accessKey,
-        texts = cision.websolution.texts[settings.uiLanguage],
+window.cision.websolution.calendar = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = (window.cision.websolution.settings.calendar || {}).accessKey,
+        texts = window.cision.websolution.texts[settings.uiLanguage],
         categories = [],
         firstRunEvent = true,
         firstRunArchive = true;
@@ -67,7 +61,7 @@ cision.websolution.calendar = function ($) {
         var postData = getPostData();
 
         if (postData != null) {
-            var promiseCalendarEvents = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar events", 'path': 'Calendar/' + accessKey, 'postData': postData });
+            var promiseCalendarEvents = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar events", 'path': 'Calendar/' + accessKey, 'postData': postData });
 
             return Promise.resolve(promiseCalendarEvents).then(function (rawData) {
                 var objFirstEvent = null;
@@ -95,19 +89,19 @@ cision.websolution.calendar = function ($) {
 
                 var tplElement = '#' + (settings.templateElement || 'tplCalendarEventListing');
                 var tplTarget = '#' + (settings.outputTargetElement || 'eventListTarget');
-                cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
                 if (settings.separateFirstEvent && firstRunEvent && objFirstEvent) {
                     var tplTopElement = '#' + (settings.topEventTemplateElement || 'tplTopEvent');
                     var tplTopTarget = '#' + (settings.topEventOutputTargetElement || 'target-event-top');
-                    cision.websolution.common.modelToHtml(objFirstEvent, tplTopElement, tplTopTarget);
+                    window.cision.websolution.common.modelToHtml(objFirstEvent, tplTopElement, tplTopTarget);
                 }
 
                 if (firstRunEvent) {
                     texts.Categories = categories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories'); 
-                    cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
+                    window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
                 }
 
                 firstRunEvent = false;
@@ -124,7 +118,7 @@ cision.websolution.calendar = function ($) {
         var postData = getPostData();
 
         if (postData != null) {
-            var promiseSidebarCalendarEvents = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Sidebar calendar", 'path': 'Calendar/' + accessKey, 'postData': postData });
+            var promiseSidebarCalendarEvents = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Sidebar calendar", 'path': 'Calendar/' + accessKey, 'postData': postData });
 
             return Promise.resolve(promiseSidebarCalendarEvents).then(function (rawData) {
                 var objFirstEvent = null;
@@ -153,7 +147,7 @@ cision.websolution.calendar = function ($) {
 
                 var tplElement = '#' + (settings.templateElement || 'tplSidebarCalendar');
                 var tplTarget = '#' + (settings.outputTargetElement || 'sidebarCalendarTarget');
-                cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
                 firstRunEvent = false;
 
@@ -169,7 +163,7 @@ cision.websolution.calendar = function ($) {
         var postData = getPostData();
 
         if (postData != null) {
-            var promiseArchivedCalendarEvents = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar archive", 'path': 'Calendar/' + accessKey + '/Archive', 'postData': postData });
+            var promiseArchivedCalendarEvents = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar archive", 'path': 'Calendar/' + accessKey + '/Archive', 'postData': postData });
 
             return Promise.resolve(promiseArchivedCalendarEvents).then(function (rawData) {
                 $.each(rawData.Events, function (idx, objEvent) {
@@ -178,7 +172,7 @@ cision.websolution.calendar = function ($) {
 
                 var tplElement = '#' + (settings.templateElement || 'tplCalendarArchiveListing');
                 var tplTarget = '#' + (settings.calendarOutputTargetElement || 'archiveEventListTarget');
-                cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+                window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
             }).catch(function (err) { console.log(err.message) });
         }
@@ -202,14 +196,14 @@ cision.websolution.calendar = function ($) {
             LanguageCode: settings.uiLanguage
         };
 
-        var promiseCalendarEvent = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar event", 'path': 'Calendar/' + accessKey + '/EventDetail', 'postData': postData });
+        var promiseCalendarEvent = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Calendar event", 'path': 'Calendar/' + accessKey + '/EventDetail', 'postData': postData });
 
         return Promise.resolve(promiseCalendarEvent).then(function (objEvent) {
             objEvent = formatEvent(objEvent);
 
             var tplElement = '#' + (settings.templateElement || 'tplEventDetail');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-event-detail');
-            cision.websolution.common.modelToHtml(objEvent, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objEvent, tplElement, tplTarget);
 
         }).catch(function (err) { console.log(err.message) });
     };
@@ -232,5 +226,5 @@ cision.websolution.calendar = function ($) {
         renderArchiveList: renderArchiveList,
         renderSidebarCalendar: renderSidebarCalendar,
         queryObj: queryObj
-    };
+    }
 }(jQuery);

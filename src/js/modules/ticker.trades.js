@@ -1,17 +1,11 @@
 ﻿// This JavaScript file is created by Cision for our ticker trades module.
 // Built to be used in combination with trades.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.trades = function($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.ticker.accessKey;
 
-cision.websolution.trades = !cision.websolution.settings.ticker ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.ticker.accessKey;
-
-    var render = function (options) {
+        var render = function (options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -19,7 +13,7 @@ cision.websolution.trades = !cision.websolution.settings.ticker ? {} : function 
             console.log("You must provide your ticker access key.");
             return;
         }
-        var promiseTickerTrades = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker Trades", 'path': 'Ticker/' + accessKey + '/Trades' });
+        var promiseTickerTrades = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Ticker Trades", 'path': 'Ticker/' + accessKey + '/Trades' });
 
         Promise.resolve(promiseTickerTrades).then(function (rawData) {
             // Retrieve the Instrument
@@ -30,7 +24,7 @@ cision.websolution.trades = !cision.websolution.settings.ticker ? {} : function 
 
             var tplElement = '#' + (settings.templateElement || 'tplTickerTrades');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-trades');
-            cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(objInstrument, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve trades data. ' + err.message) });
     };
@@ -38,4 +32,4 @@ cision.websolution.trades = !cision.websolution.settings.ticker ? {} : function 
     return {
         render: render
     };
-}(jQuery);
+} (jQuery);

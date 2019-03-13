@@ -1,19 +1,13 @@
 ﻿// This JavaScript file is created by Cision for our insider module.
 // Built to be used in combination with insiders.html
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.texts = cision.websolution.texts || {};
-cision.websolution.settings = cision.websolution.settings || {};
-cision.websolution.formatHelpers = cision.websolution.formatHelpers || {};
+window.cision.websolution.insiders = function ($) {
+    var settings = $.extend({}, window.cision.websolution.settings.general),
+        accessKey = window.cision.websolution.settings.insider.accessKey;
 
-cision.websolution.insiders = !cision.websolution.settings.insider ? {} : function ($) {
-    var settings = $.extend({}, cision.websolution.settings.general),
-        accessKey = cision.websolution.settings.insider.accessKey;
-debugger;
-    var textsInsidersDescriptions = cision.websolution.texts[settings.uiLanguage].insidersDescriptions;
+    var textsInsidersDescriptions = window.cision.websolution.texts[settings.uiLanguage].insidersDescriptions;
 
-    var renderTransactionsList = function (options) {
+    function renderTransactionsList(options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -27,7 +21,7 @@ debugger;
             endDate: settings.endDate
         };
 
-        var promiseInsiders = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Insiders", 'path': 'InsiderTrade/' + accessKey + '/TransactionsList', 'postData': postData });
+        var promiseInsiders = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Insiders", 'path': 'InsiderTrade/' + accessKey + '/TransactionsList', 'postData': postData });
 
         return Promise.resolve(promiseInsiders).then(function (rawData) {
             $.each(rawData.Transactions, function (idx, objTransaction) {
@@ -44,12 +38,12 @@ debugger;
 
             var tplElement = '#' + (settings.templateElement || 'tplInsiderTransactionsList');
             var tplTarget = '#' + (settings.outputTargetElement || 'target-transactions');
-            cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
+            window.cision.websolution.common.modelToHtml(rawData, tplElement, tplTarget);
 
         }).catch(function (err) { console.log('Could not retrieve insiders data. ' + err.message) });
     };
 
-    var renderToGraph = function (objChart, options) {
+    function renderToGraph(objChart, options) {
         if (options) {
             $.extend(settings, options);
         }
@@ -63,10 +57,10 @@ debugger;
             endDate: settings.endDate
         };
 
-        var promiseInsidersGraph = cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Insiders", 'path': 'InsiderTrade/' + accessKey + '/TransactionsList', 'postData': postData });
+        var promiseInsidersGraph = window.cision.websolution.common.getModuleData({ 'accessKey': accessKey, 'module': "Insiders", 'path': 'InsiderTrade/' + accessKey + '/TransactionsList', 'postData': postData });
 
         return Promise.resolve(promiseInsidersGraph).then(function (rawData) {
-            var insiderSettings = cision.websolution.common.getIndicatorSettings(settings.insidersUniqueKey);
+            var insiderSettings = window.cision.websolution.common.getIndicatorSettings(settings.insidersUniqueKey);
 
             var pointsInsiders = [];
             $.each(rawData.Transactions, function (idx, objTransaction) {
@@ -120,7 +114,6 @@ debugger;
     };
 
     return {
-
         renderTransactionsList: renderTransactionsList,
         renderToGraph: renderToGraph
     };

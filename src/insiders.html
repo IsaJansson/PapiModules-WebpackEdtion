@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet"></head>
 
      <!-- External scripts -->
-     <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+     <!-- <script type="text/javascript" src="https://websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.js"></script> -->
     <script type="text/javascript" src="bundle.js"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 
     <script type="text/javascript">
         $(function () {
-            cision.websolution.insiders.renderTransactionsList({
+            window.cision.websolution.insiders.renderTransactionsList({
                 startDate: moment().subtract(5, 'years').format('YYYY-MM-DD')
             });
         });

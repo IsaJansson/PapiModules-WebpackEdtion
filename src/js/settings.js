@@ -1,12 +1,21 @@
 // This JavaScript file is created by Cision and holds settings for all our client modules.
 // This file works as a config file for all the modules and here you will find general settings 
 // and a specific sektion for each module with its access key that is used to fetch the data from our API. 
+require('jsrender')($);
+import _ from "underscore";
+import "bootstrap";
+import './bootstrap-datepicker.js';
+import Highcharts from 'highcharts/highstock';
+import exporting from 'highcharts/modules/exporting';
+exporting(Highcharts);
 
-var cision = cision || {};
-cision.websolution = cision.websolution || {};
-cision.websolution.settings = cision.websolution.settings || {};
+window.cision = {};
+window.cision.websolution = cision.websolution || {};
+window.cision.websolution.settings = cision.websolution.settings || {};
 
-cision.websolution.settings = {
+$.support.cors = true;
+
+window.cision.websolution.settings = {
     general: {
         // Settings that apply to all modules 
         serviceEndpoint: 'http://publish.ne.cision.com/papi/',
