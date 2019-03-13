@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cision Websolutions</title>
+    <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
+
+    <!-- External scripts -->
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+
+    <!-- Cision script files -->
+    <script type="text/javascript" src="scripts/texts.js"></script>
+    <script type="text/javascript" src="scripts/settings.js"></script>
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/Cision.Websolutions-4.0.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div id="target-ticker" class="small-content stand-alone-ticker"></div>
+    </div>
+
+    <script id="templateTicker" type="text/x-jsrender">
+        <table class="ticker-large">
+            {{for tickers}}
+            <tr>
+                <td class="ticker-price {{if Delta > 0}}text-success{{else Delta == 0}}text-info{{else}}text-danger{{/if}}">{{>~formatNumber(Price)}}</td>
+                <td>{{>~formatDate(QuoteTime, "DD MMM YYYY")}} {{>~formatTime(QuoteTime, "HH:mm")}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextShare}}</td>
+                <td>{{>TickerName}} ({{>TickerSymbol}})</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextCurrency}}</td>
+                <td>{{>TradeCurrency}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextLatestChange}}</td>
+                <td><img src="{{url:ArrowImageurl}}" /> {{>~formatNumber(Delta)}} ({{>~formatNumber(DeltaPercentage, 2)}} %)</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextAsk}}</td>
+                <td>{{>~formatNumber(AskPrice)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextBid}}</td>
+                <td>{{>~formatNumber(BidPrice)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextHigh}}</td>
+                <td>{{>~formatNumber(HighPrice)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextLow}}</td>
+                <td>{{>~formatNumber(LowPrice)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextVolume}}</td>
+                <td>{{>~formatNumber(Quantity, 0)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextTurnover}}</td>
+                <td>{{>~formatNumber(Turnover)}}</td>
+            </tr>
+            <tr>
+                <td class="text-muted">{{>TextMarket}}</td>
+                <td>{{if mcapTotal}}{{>mcapTotal}}{{/if}}</td>
+
+            </tr>
+            <tr>
+                <td class="text-muted text-small">{{>TextDelayInfo}}</td>
+            </tr>
+            {{/for}}
+        </table>
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            cision.websolution.tickers.render();
+        });
+    </script>
+
+</body>
+</html>
+

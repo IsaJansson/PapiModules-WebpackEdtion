@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cision Websolutions</title>
+    <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
+
+    <!-- External scripts -->
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+
+    <!-- Cision script files -->
+    <script type="text/javascript" src="scripts/texts.js"></script>
+    <script type="text/javascript" src="scripts/settings.js"></script>
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/Cision.Websolutions-4.0.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div id="target-trades" class="small-content"></div>
+    </div>
+        <script id="tplTickerTrades" type="text/x-jsrender">
+            <div>
+                <h3>{{>TickerName}}, {{>ISIN}}, {{>TickerSymbol}}</h3>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{>TextPrice}} {{>TradeCurrency}}</th>
+                            <th>{{>TextVolume}}</th>
+                            <th>{{>TextBuyer}}</th>
+                            <th>{{>TextSeller}}</th>
+                            <th>{{>TextTime}}</th>
+                        </tr>
+                    </thead>
+                    {{for Trades}}
+                    <tr>
+                        <td>{{>~formatNumber(Price)}}</td>
+                        <td class="text-right">{{>~formatNumber(Quantity, 0)}}</td>
+                        <td class="text-center">{{>Buyer}}</td>
+                        <td class="text-center">{{>Seller}}</td>
+                        <td class="text-center" data-time="{{>TradeTime}}">{{>~formatTime(TradeTime, 'HH:mm:ss')}}</td>
+                    </tr>
+                    {{/for}}
+                </table>
+            </div>
+        </script>
+
+    <script type="text/javascript">
+        $(function () {
+            cision.websolution.trades.render();
+        });    
+    </script>
+
+</body>
+</html>
+

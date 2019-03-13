@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cision Websolutions</title>
+    <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="styles/fontawesome.css" type="text/css" />
+    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
+
+    <!-- External scripts -->
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+
+    <!-- Cision script files -->
+    <script type="text/javascript" src="Scripts/texts.js"></script>
+    <script type="text/javascript" src="Scripts/settings.js"></script>
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/Cision.Websolutions-4.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="target-release-detail"></div>
+    </div>
+
+    <script id="tplReleaseDetail" type="text/x-jsrender">
+        <div class="row">
+            {{if Quotes || Images || Quickfacts}}
+            <div class="col-3">
+                {{if Images}}
+                {{for Images}}
+                <div class="card">
+                    <a class="card-link" href="{{:DownloadUrl}}" target="_blank">
+                        <img class="card-img-top" src="{{:UrlTo200x200ArResized}}" alt="{{>Title}}" />
+                    </a>
+                </div>
+                <br />
+                {{/for}}
+                {{/if}}
+                {{if Quotes}}
+                <div class="Release-Quotes">
+                    {{for Quotes}}
+                    <p class="Release-Quotes"><strong>{{>Author}}:</strong> "{{>Text}}" </p>
+                    {{/for}}
+                </div>
+                {{/if}}
+
+                {{if QuickFacts }}
+                <div class="Release-QuickFacts">
+                    {{for QuickFacts}}
+                    <p class="Release-QuickFacts">"{{>#data}}"</p>
+                    {{/for}}
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
+
+            <div class="col-9">
+                <h3>{{>Title}}</h3>
+                <p class="text-muted">Publish Date: {{>PublishDateFormatted}}</p>
+                <p>{{:HtmlIntro}}</p>
+                <p>{{:HtmlBody}}</p>
+                <p>{{:HtmlCompanyInformation}}</p>
+                <p>{{:HtmlContactInformation}}</p>
+
+                {{if EmbeddedItems}}
+                <div class="Release-Embedded">
+                    {{for EmbeddedItems}}
+                    <div class="release-Embedded">
+                        {{:EmbedCode}}
+                    </div>
+                    {{/for}}
+                </div>
+                <br />
+                {{/if}}
+
+                {{if Keywords}}
+                <div class="Release-keywords">
+                    {{for Keywords}}
+                    <span>{{>#data}}</span>,
+                    {{/for}}
+                </div>
+                {{/if}}
+
+                {{if Files}}
+                <div class="Release-file">
+                    {{for Files}}
+                    <div class="Release-file" style="height:40px">
+                        <a class="{{:FileType}}" href="{{:Url}}"><i class="fas fa-file-{{:FileType}}"></i> {{>Title}}</a>
+                    </div>
+                    {{/for}}
+                </div>
+                {{/if}}
+                <br />
+                <a href="release.html"><div class="btn btn-outline-dark">{{>TextBack}}</div></a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            // Retrieve encrypted ID
+            var releaseIdentifier = queryObj()['releaseIdentifier'];
+
+            cision.websolution.newsfeed.renderDetail({
+                releaseIdentifier: releaseIdentifier
+            });
+        });
+
+        function queryObj() {
+            var result = {};
+            var queryString = location.search.slice(1);
+            var re = /([^&=]+)=([^&]*)/g;
+            var m;
+
+            while (m = re.exec(queryString)) {
+                result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>

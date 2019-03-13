@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Cision Web Solutions</title>
+    
+    <link href="style.css" rel="stylesheet"></head>
+
+     <!-- External scripts -->
+     <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+    <script type="text/javascript" src="bundle.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="target-transactions"></div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            cision.websolution.insiders.renderTransactionsList({
+                startDate: moment().subtract(5, 'years').format('YYYY-MM-DD')
+            });
+        });
+    </script>
+
+    <script id="tplInsiderTransactionsList" type="text/x-jsrender">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th style="min-width:100px;">{{>TextDate}}</th>
+                    <th>{{>TextInsiderPerson}}</th>
+                    <th>{{>TextPosition}}</th>
+                    <th>{{>TextInstrument}}</th>
+                    <th>{{>TextQuantity}}</th>
+                    <th style="min-width:100px;">{{>TextPrice}} {{>TradeCurrency}}</th>
+                    <th>{{>TextTransaction}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{for Transactions}}
+                <tr>
+                    <td>{{>TransactionDateFormatted}}</td>
+                    <td class="text-uppercase">{{>InsiderName}}</td>
+                    <td>{{>PositionDescription}}</td>
+                    <td>{{>SecurityTypeDescription}} ({{>Security}})</td>
+                    <td>{{>~formatNumber(Quantity, 0)}}</td>
+                    <td>{{>~formatNumber(Price, 2)}}</td>
+                    <td>{{>TransactionTypeDescription}}</td>
+                </tr>
+                {{/for}}
+            </tbody>
+        </table>
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 // webpack v4
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
@@ -7,7 +8,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
-  entry: { main: './src/index.js' },
+  entry: ['./src/cision.index.js','./src/cision.modules.js', './src/cision.config.js' ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -47,9 +48,19 @@ module.exports = {
     new CleanWebpackPlugin('dist', {}),
     new HtmlWebpackPlugin({
       inject: false,
-      hash: true,
       template: './src/index.html',
       filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: './src/insiders.html',
+      filename: 'insiders.html'
+    }),
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'jquery': 'jquery',
+      Popper: ['popper.js', 'default']
     }),
     new WebpackMd5Hash(),
     //new MinifyPlugin()

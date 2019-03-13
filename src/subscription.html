@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cision Websolutions</title>
+    <link rel="stylesheet" href="//websolutions.ne.cision.com/Styles/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+    <div class="container">
+        <h3>Release subscription</h3>
+
+        <form method="post" name="PageForm" action="//publish.test.ne.cision.com/Subscription/SubscribeWithCaptcha">
+            <input type="hidden" name="subscriptionuniqueidentifier" value="e1d299d249" />
+            <input type="hidden" name="replylanguage" value="sv" />
+            <input type="hidden" name="Replylanguage" value="sv" />
+            <div class="subscribeInfo form-check float-left">
+                <input type="checkbox" name="Language" value="en" class="form-check-input" id="LanguageEn" checked="checked" />
+                <label class="form-check-label" for="LanguageEn">English</label>
+                <br />
+                <input type="checkbox" name="Language" value="sv" class="form-check-input" id="LanguageSv" />
+                <label class="form-check-label" for="LanguageSv">Swedish</label>
+                <br />
+                <input type="checkbox" name="Language" value="nb" class="form-check-input" id="LanguageNo" />
+                <label class="form-check-label" for="LanguageNo">Norwegian</label>
+            </div>
+            <div class="subscribeInfo form-check float-left">
+                <input type="checkbox" name="informationtype" value="kmk,rpt,rdv" class="form-check-input" id="interim" />
+                <label class="form-check-label" for="interim">Reports</label>
+                <br />
+                <input type="checkbox" name="informationtype" value="prm" id="press" class="form-check-input" checked="checked" />
+                <label class="form-check-label" for="press">Press releases</label>
+                <br />
+                <input type="checkbox" name="informationtype" value="nvb" class="form-check-input" id="news" />
+                <label class="form-check-label" for="press">News letters</label>
+            </div>
+            <br />
+            <div class="mail form-group">
+                <input type="text" name="Name" placeholder="Your name" class="form-control" id="name" />
+                <input type="text" name="Email" placeholder="Your email" class="form-control" id="email" />
+                <div class="g-recaptcha" data-sitekey="6LcINpIUAAAAAMx8QHK-j8ThURyHSA1_ESrPKTa6"></div>
+                <button class="btn btn-outline-dark" id="sendForm">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal fade" id="subscriptionSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Congratulations!</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Your subscription is now saved and you will recive an email to verify your email address and activate the subscription.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="subscriptionFailedModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sorry, there was something wrong with your request.</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>We could not save your subscriptions please go back and try again.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#sendForm").on("click", function (e) {
+                e.preventDefault();
+                var url = $("form").attr("action"),
+                    formData = $("form").serializeArray(),
+                    recaptchaResponse = grecaptcha.getResponse();
+                if (recaptchaResponse) {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: formData
+                    })
+                        .done(function () {
+                            $('#subscriptionSuccessModal').modal("show");
+                            $(".mail input, .mail select").val('');
+                            grecaptcha.reset();
+                            $.each($(".subscribeInfo input"),
+                                function (ix, item) {
+                                    $(item).attr("checked", false);
+                                });
+                        })
+                        .fail(function (e) {
+                            $('#subscriptionFailedModal').modal("show");
+                            grecaptcha.reset();
+                        });
+                } else {
+                    $('#subscriptionFailedModal').modal("show");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
