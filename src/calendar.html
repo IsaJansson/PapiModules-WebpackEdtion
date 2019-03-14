@@ -1,18 +1,10 @@
 ﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>Calendar Events</title>
-    <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="styles/calendar.css" type="text/css" media="screen" />
-
-    <!-- External scripts -->
-    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
-
-    <!-- Cision script files -->
-    <script type="text/javascript" src="scripts/texts.js"></script>
-    <script type="text/javascript" src="scripts/settings.js"></script>
-    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/Cision.Websolutions-4.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cision Web Solutions | Calendar</title>
 </head>
 <body>
     <div class="container">
@@ -40,7 +32,7 @@
                 <td>
                     <div class="first-event">
                         <h2>{{>TextFirstEvent}}</h2>
-                        <a href="calendar-event.html?guid={{>EventGuid}}">
+                        <a href="calendarEvent.html?guid={{>EventGuid}}">
                             <img src="{{>LogoUrl}}" />
                             <h3>{{>Title}}</h3>
                             <div class="pubDate"><p>{{>EventTimeFormatted}}</p></div>
@@ -86,13 +78,13 @@
                 {{for Events}}
                 <tr class="all CalFin">
                     <td class="cal-image">
-                        <a href="calendar-event.html?guid={{>EventGuid}}"><img src="{{>LogoUrl}}" style="max-width:100px;max-height:100px;" /></a>
+                        <a href="calendarEvent.html?guid={{>EventGuid}}"><img src="{{>LogoUrl}}" style="max-width:100px;max-height:100px;" /></a>
                     </td>
                     <td class="caldate">
                         <span class="date">{{>EventTimeFormattedDate}}</span>, <span class="time">{{>EventTimeFormattedTime}}</span>
                     </td>
                     <td class="preview">
-                        <p><a href="calendar-event.html?guid={{>EventGuid}}">{{>Title}}</a></p>
+                        <p><a href="calendarEvent.html?guid={{>EventGuid}}">{{>Title}}</a></p>
                         {{if Location}}
                         <span>{{>Location}}</span>
                         {{/if}}
@@ -121,7 +113,7 @@
                         <span class="date">{{>EventTimeFormattedDate}}</span>, <span class="time">{{>EventTimeFormattedTime}}</span>
                     </td>
                     <td class="preview">
-                        <p><a href="calendar-event.html?guid={{>EventGuid}}">{{>Title}}</a></p>
+                        <p><a href="calendarEvent.html?guid={{>EventGuid}}">{{>Title}}</a></p>
                         {{if Location}}
                         <span>{{>Location}}</span>
                         {{/if}}
@@ -157,13 +149,13 @@
                 {{for Events}}
                 <tr class="all CalFin">
                     <td class="cal-image">
-                        <a href="calendar-event.html?guid={{>EventGuid}}"><img src="{{>LogoUrl}}" style="max-width:100px;max-height:100px;" /></a>
+                        <a href="calendarEvent.html?guid={{>EventGuid}}"><img src="{{>LogoUrl}}" style="max-width:100px;max-height:100px;" /></a>
                     </td>
                     <td class="caldate">
                         <span class="date">{{>EventTimeFormattedDate}}</span>, <span class="time">{{>EventTimeFormattedTime}}</span>
                     </td>
                     <td class="preview">
-                        <p><a href="calendar-event.html?guid={{>EventGuid}}">{{>Title}}</a></p>
+                        <p><a href="calendarEvent.html?guid={{>EventGuid}}">{{>Title}}</a></p>
                         {{if Location}}
                         <span>{{>Location}}</span>
                         {{/if}}
@@ -187,7 +179,7 @@
                         <span class="date">{{>EventTimeFormattedDate}}</span>, <span class="time">{{>EventTimeFormattedTime}}</span>
                     </td>
                     <td class="preview">
-                        <p><a href="calendar-event.html?guid={{>EventGuid}}">{{>Title}}</a></p>
+                        <p><a href="calendarEvent.html?guid={{>EventGuid}}">{{>Title}}</a></p>
                         {{if Location}}
                         <span>{{>Location}}</span>
                         {{/if}}
@@ -204,8 +196,8 @@
     </script>
 
     <script type="text/javascript">
-        var settings = cision.websolution.settings.general,
-            texts = cision.websolution.texts[settings.uiLanguage];
+        var settings = window.cision.websolution.settings.general,
+            texts = window.cision.websolution.texts[settings.uiLanguage];
 
         $(function () {
             retrieveCalandarEvents(settings.pageIndex, settings.pageSize);
@@ -215,7 +207,7 @@
         });
 
         function retrieveCalandarEvents(pageIndex, pageSize, category) {
-            var promiseEvents = cision.websolution.calendar.renderEventList({
+            var promiseEvents = window.cision.websolution.calendar.renderEventList({
                 calendarPageIndex: pageIndex,
                 calendarPageSize: pageSize,
                 calendarCategory: category || '',
@@ -223,7 +215,7 @@
                 timeFormat: 'HH:mm',
                 endDate: moment().add(5, 'years').format('YYYY-MM-DD')
             });
-            var promiseArchivedEvents = cision.websolution.calendar.renderArchiveList({
+            var promiseArchivedEvents = window.cision.websolution.calendar.renderArchiveList({
                 calendarPageIndex: pageIndex,
                 calendarPageSize: pageSize,
                 calendarCategory: category || '',

@@ -1,18 +1,10 @@
-﻿<!doctype html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>Cision Websolutions</title>
-    <link rel="stylesheet" href="styles/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="styles/cision.css" type="text/css" media="screen" />
-
-    <!-- External script files -->
-    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/vendor.scripts.min.js"></script>
-
-    <!-- Cision script files -->
-    <script type="text/javascript" src="scripts/texts.js"></script>
-    <script type="text/javascript" src="scripts/settings.js"></script>
-    <script type="text/javascript" src="//websolutions.test.ne.cision.com/Scripts/dist/Cision.Websolutions-4.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cision Web Solutions | Ownership</title>
 </head>
 <body>
     <div class="container">
@@ -129,8 +121,8 @@
 
     <script type="text/javascript">
         $(function () {
-            var settings = cision.websolution.settings.general,
-                texts = cision.websolution.texts[settings.uiLanguage];
+            var settings = window.cision.websolution.settings.general,
+                texts = window.cision.websolution.texts[settings.uiLanguage];
 
             $("<li class='nav-item'><a href='#target-largest' class='nav-link active' data-toggle='tab'>" + texts.TextLargest + "</a></li>").appendTo("#ownershipTabs");
             $("<li class='nav-item'><a href='#target-grouped' class='nav-link' data-toggle='tab'>" + texts.TextGrouped + "</a></li>").appendTo("#ownershipTabs");
@@ -139,12 +131,12 @@
 
             $('#ownershipTabs a').click(function (e) {
                 e.preventDefault();
-                cision.websolution.ownership.renderOwnershipTab($(this)[0].hash);
+                window.cision.websolution.ownership.renderOwnershipTab($(this)[0].hash);
                 $(this).tab('show');
             });
 
             //render first ownership
-            cision.websolution.ownership.renderLargestShareholders();
+            window.cision.websolution.ownership.renderLargestShareholders();
             settings.ownershipTabLoaded["#target-largest"] = true;
             $('#ownershipTabs a:first').tab('show');
         });
