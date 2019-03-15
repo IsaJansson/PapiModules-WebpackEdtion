@@ -9,17 +9,15 @@ window.cision.websolution.sharegraph = function($){
         typeOfChart = "endOfDay",
         comparisonType = "price",
         actions = [],
-        $chartContainer;
+        objChart;
 
-    var init = function(options) {
+    function init(options) {
         settings.endOfDayStartFrom = moment().subtract(6, 'months').format('YYYY-MM-DD'); // we default to displaying 6 months
         settings.endOfDayEndTime = moment().format('YYYY-MM-DD');
 
         if (options) {
             $.extend(settings, options);
         }
-
-        $chartContainer = $('#' + settings.chartContainerId);
 
         if (!settings.isMiniShareGraph) {
             // render sharegraph wrapper for the extra elements
@@ -31,9 +29,6 @@ window.cision.websolution.sharegraph = function($){
             initializeDatepickers();
             setupCustomActions();
             setupEvents();
-
-            // hack to fix a problem with the highcharts print functionality
-            sharegraphPrintFix();
 
             // render extras
             window.cision.websolution.tickers.render();
@@ -47,13 +42,13 @@ window.cision.websolution.sharegraph = function($){
 
     function sharegraphPrintFix() {
         // fix for graph size issue on print
-        var width = $chartContainer.width();
-        var height = $chartContainer.height();
+        var width = $('#' + settings.chartContainerId).width();
+        var height = $('#' + settings.chartContainerId).height();
         var beforePrint = function () {
-            $chartContainer.highcharts().setSize(width, height, false);
+            objChart.setSize(width, height, false);
         };
         var afterPrint = function () {
-            $chartContainer.highcharts().setSize.apply(this, this.resetParams);
+            objChart.setSize.apply(this, this.resetParams);
         };
 
         if (window.matchMedia) {
@@ -135,27 +130,29 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function setupEvents() {
+        $('.dropdown-toggle').dropdown('update');
+
         $("#print-chart").on("click", function () {
-            $chartContainer.highcharts().print();
+            objChart.print();
         });
         $("#export-png-chart").on("click", function () {
-            $chartContainer.highcharts().exportChart(null,
+            objChart.exportChart(null,
                 {
                     type: 'image/png'
                 });
         });
         $("#export-jpeg-chart").on("click", function () {
-            $chartContainer.highcharts().exportChart({
+            objChart.exportChart({
                 type: 'image/jpeg'
             });
         });
         $("#export-svg-chart").on("click", function () {
-            $chartContainer.highcharts().exportChart({
+            objChart.exportChart({
                 type: 'image/svg+xml'
             });
         });
         $("#export-pdf-chart").on("click", function () {
-            $chartContainer.highcharts().exportChart({
+            objChart.exportChart({
                 type: 'application/pdf',
                 filename: 'my-pdf'
             });
@@ -181,7 +178,7 @@ window.cision.websolution.sharegraph = function($){
         $('#share-options-select .show-hide-instrument').on('click', function () {
             if (!$(this).hasClass("cision-disabled")) {
                 $(this).toggleClass("selected");
-                window.cision.websolution.updateInstrumentSeries($(this));
+                updateInstrumentSeries($(this));
             }
         });
         $('#share-options-select .chartComparisonType').on('click', function (event) {
@@ -273,7 +270,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     var setInstrumentVisibility = function (uniqueKey, makeVisible) {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
 
         $.each(objChart.series, function (idx, objSerie) {
             var objCurrentInstrument = objSerie.userOptions.objOriginal; /* the original object is attached above */
@@ -356,8 +353,6 @@ window.cision.websolution.sharegraph = function($){
     }
 
     var reinitializeState = function() {
-        $chartContainer = $('#' + settings.chartContainerId);
-
         $('.show-hide-instrument')
             .each(function () {
                 var thisElement = $(this);
@@ -369,7 +364,7 @@ window.cision.websolution.sharegraph = function($){
     /* This will be incremented for every peer-or-index added (decremented when removed) */
     var updateInstrumentSeries = function(element) {
         var $el = $(element);
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
         var uniqueKey = $el.data("key");
         var triggerComparison = $el.data("triggercomparison");
         var makeVisible = $el.hasClass("selected");
@@ -460,7 +455,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function addDividends(startDate, uniqueKey) {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
 
         // Check if dividend are already selected
         var isFound = false;
@@ -483,7 +478,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function addInsiders(startDate, uniqueKey) {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
 
         var isFound = false;
         $.each(objChart.series,
@@ -504,7 +499,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function showComparisonChart() {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
         comparisonType = 'percent';
 
         $.each(objChart.series,
@@ -522,7 +517,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function showPriceChart() {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
         comparisonType = 'none';
 
         $.each(objChart.series,
@@ -544,7 +539,7 @@ window.cision.websolution.sharegraph = function($){
     }
 
     function showReleasesOnChart(uniqueKey) {
-        var objChart = $chartContainer.highcharts();
+        // var objChart = Highcharts.chart(settings.chartContainerId);
 
         var promiseGraphReleases = window.cision.websolution.common.getModuleData({
             'accessKey': accessKey, 'module': "Share releases", 'path': 'Share/' + accessKey + '/Releases', 'postData': {
@@ -917,7 +912,7 @@ window.cision.websolution.sharegraph = function($){
             }
         });
 
-        var objChart = new Highcharts.StockChart({
+        objChart = new Highcharts.StockChart({
             chart: {
                 renderTo: settings.chartContainerId,
                 defaultSeriesType: settings.defaultSeriesType,

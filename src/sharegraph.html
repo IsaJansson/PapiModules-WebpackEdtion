@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cision Web Solutions | Sharegraph</title>
+    <link href="style.css" rel="stylesheet"></head>
+    <script type="text/javascript" src="bundle.js"></script>
 </head>
 <body>
     <div class="container">
         <div id="target-ticker"></div>
         <div id="target-sharegraph-wrapper"></div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            window.cision.websolution.sharegraph.init();
+        });
+
+
+    </script>
 
     <script id="templateTicker" type="text/x-jsrender">
         {{if showHorisontalTicker}}
@@ -49,11 +59,11 @@
         <div class="row justify-content-between">
             <div>
                 <div class="dropdown" id="share-options-select">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="shareOptionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="shareOptionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
                         {{>TextShareOptions}}
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" aria-labelledby="shareOptionsDropdown">
                         <li class="dropdown-header">{{>TextShare}} & {{>TextIndex}}</li>
                         {{for mainInstruments}}
                         <li class="dropdown-item show-hide-instrument selected" data-initialstate="selected" data-key='{{>symbol}}{{>marketPlace}}{{>currency}}'><a href="#"><i class="fas fa-check"></i>{{>name}}</a></li>
@@ -88,11 +98,11 @@
                     </ul>
                 </div>
                 <div class="dropdown" id="share-download-options">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="downloadOptionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="downloadOptionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
                         {{>TextDownload}}
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" aria-labelledby="downloadOptionsDropdown">
                         <li class="dropdown-item" id="excel-download"><a href="#"><i class="fas fa-download"></i> {{>TextDownloadShareHistory}}</a></li>
                         <li class="dropdown-item" id="print-chart"><a href="#"><i class="fas fa-print"></i> {{>TextPrintChart}}</a></li>
                         <li class="dropdown-item" id="export-png-chart"><a href="#"><i class="fas fa-image"></i> {{>TextDownloadAsPNG}}</a></li>
@@ -257,10 +267,5 @@
         {{/if}}
     </script>
 
-    <script type="text/javascript">
-        $(function () {
-            window.cision.websolution.sharegraph.init();
-        });
-    </script>
 </body>
 </html>

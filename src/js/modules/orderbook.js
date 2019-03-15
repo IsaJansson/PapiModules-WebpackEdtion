@@ -5,7 +5,7 @@ window.cision.websolution.orderbook = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.orderbook.accessKey;
 
-        window.cision.websolution.orderbook.render = function (options) {
+        var render = function (options) {
         if (options) {
             $.extend(settings, options);
         }

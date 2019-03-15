@@ -1,6 +1,7 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
 
+window.cision.websolution.estimate = cision.websolution.estimate || {};
 window.cision.websolution.estimate.quarterly = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.estimate.accessKey;

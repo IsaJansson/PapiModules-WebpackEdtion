@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
-  entry: ['./src/cision.config.js', './src/cision.index.js', './src/cision.modules.js' ],
+  entry: ['./src/cision.config.js', './src/cision.index.js', './src/cision.modules.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -22,6 +22,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]',
+            },
+          },
+        ],
+      },
+      {
         test: /\.js$/,
         // only include files present in the `src` subdirectory
         include: [path.resolve(__dirname, "src")],
@@ -29,7 +40,17 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: [  ["@babel/env", {
+              "useBuiltIns": "usage",
+              "targets": {
+                  "browsers": [
+                      "chrome >= 61",
+                      "edge >= 15",
+                      "firefox >= 52",
+                      "ie >= 10",
+                  ]
+              }
+          }]]
           }
         }
       },
@@ -39,6 +60,21 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: 'url-loader?limit=10000',
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        use: 'file-loader',
+      },
+      {
+        test: /font-awesome\.config\.js/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'font-awesome-loader' }
+        ]
       },
       {
         test: require.resolve('jquery'),
@@ -56,12 +92,28 @@ module.exports = {
           loader: 'expose-loader',
           options: 'moment'
         }]
-      }
+      },
+      {
+        test: require.resolve('underscore'),
+        use: [{
+          loader: 'expose-loader',
+          options: '_'
+        }]
+      },
     ]
   },
   plugins: [
     new ExtractTextPlugin('style.css'),
     new CleanWebpackPlugin('dist', {}),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      moment: "moment",
+      _: "underscore",
+      Highcharts: "highcharts/highstock",
+      highcharts: "highcharts/highstock"
+    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: './src/index.html',
@@ -161,11 +213,6 @@ module.exports = {
       inject: true,
       template: './src/trades.html',
       filename: 'trades.html'
-    }),
-    new webpack.ProvidePlugin({
-      jquery: 'jquery',
-      Popper: ['popper.js', 'default'],
-      moment: "moment"
     }),
     //new MinifyPlugin()
   ]

@@ -118,6 +118,19 @@ a {
     width: 25px;
 }
 
+#ticker-up {
+    background-image:url('./../images/up.png');
+    background-repeat:no-repeat;
+}
+#ticker-down {
+    background-image:url('./../images/down.png');
+    background-repeat:no-repeat;
+}
+#ticker-unadjusted {
+    background-image:url('./../images/unadjusted.png');
+    background-repeat:no-repeat;
+}
+
 .ticker-large td:nth-child(odd) {
     padding-right: 30px;
 }

@@ -36,7 +36,7 @@ a.estimateHistory {
 }
 
 #recommendation_gradient {
-    background-image: url(http://feed.ne.cision.com/estimate/images/RecommendationGradient.png);
+    background-image: url("../images/recommendationgradient.png");
     position: relative;
     background-size: 100%;
     width: 100%;

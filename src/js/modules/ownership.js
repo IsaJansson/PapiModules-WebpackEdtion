@@ -122,7 +122,7 @@ window.cision.websolution.ownership = function ($) {
             });
         }
         var chartOptions = getChartOptions(rawData, dataArray);
-        $('#container-largest-shareholders-chart').highcharts(chartOptions);
+        Highcharts.chart('container-largest-shareholders-chart', chartOptions);
     };
 
     var renderNewShareholders = function (options) {
@@ -263,7 +263,7 @@ window.cision.websolution.ownership = function ($) {
             }
         });
         var chartOptions = getChartOptions(rawData, dataArray);
-        $('#target-shareholderareas-chart').highcharts(chartOptions);
+        Highcharts.chart('target-shareholderareas-chart', chartOptions);
     };
 
     var renderLargestGroupedShareholders = function (options) {
@@ -316,7 +316,7 @@ window.cision.websolution.ownership = function ($) {
         }
 
         var chartOptions = getChartOptions(rawData, dataArray);
-        $('#container-largest-grouped-shareholders-chart').highcharts(chartOptions);
+        Highcharts.chart('container-largest-grouped-shareholders-chart', chartOptions);
     };
 
     return {
