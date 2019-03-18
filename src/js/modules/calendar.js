@@ -18,7 +18,7 @@ window.cision.websolution.calendar = function ($) {
             return;
         }
 
-        return postData = {
+        return {
             languageCode: settings.uiLanguage,
             pageIndex: settings.pageIndex,
             pageSize: settings.pageSize || 50,

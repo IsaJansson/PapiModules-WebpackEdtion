@@ -178,6 +178,9 @@ $RECYCLE.BIN/
 # NodeJS modules
 node_modules
 
+#compiled code
+dist
+
 # main.css is compiled from all the .less files and should therefor not be included
 /src/ReConnect/ReConnect.UI.Web/Content/main.css
 

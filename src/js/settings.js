@@ -7,6 +7,12 @@ window.Popper = require('popper.js').default; // pay attention to "default"
 import 'bootstrap';
 import './bootstrap-datepicker.js';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faCheck, faCalendarAlt, faCalendarPlus, faDownload, faPrint, faImage, faFilePdf, faFileExcel,faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCheck, faCalendarAlt, faCalendarPlus, faDownload, faPrint, faImage, faFilePdf, faFileExcel,faCaretLeft, faCaretRight);
+dom.watch();
+
 window.cision = {};
 window.cision.websolution = cision.websolution || {};
 window.cision.websolution.settings = cision.websolution.settings || {};
@@ -16,7 +22,7 @@ $.support.cors = true;
 window.cision.websolution.settings = {
     general: {
         // Settings that apply to all modules 
-        serviceEndpoint: 'http://publish.ne.cision.com/papi/',
+        serviceEndpoint: 'https://publish.ne.cision.com/papi/',
         uiLanguage: 'en',
         useProxyHandler: false,
         // proxyHandler: 'ProxyCallsHttpHandler.ashx',

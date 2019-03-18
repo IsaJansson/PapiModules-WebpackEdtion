@@ -38,7 +38,7 @@ window.cision.websolution.printedMaterial = function ($) {
             return;
         }
 
-        return postData = {
+        return {
             languageCode: settings.uiLanguage,
             pageIndex: settings.PageIndex,
             pageSize: settings.PageSize || 50,

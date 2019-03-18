@@ -70,13 +70,6 @@ module.exports = {
         use: 'file-loader',
       },
       {
-        test: /font-awesome\.config\.js/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'font-awesome-loader' }
-        ]
-      },
-      {
         test: require.resolve('jquery'),
         use: [{
           loader: 'expose-loader',
