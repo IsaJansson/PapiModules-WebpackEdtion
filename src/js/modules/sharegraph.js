@@ -1,6 +1,6 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
-
+import '../insiderTexts.js';
 import './module.dependencies.js';
 
 window.cision.websolution.sharegraph = function($){

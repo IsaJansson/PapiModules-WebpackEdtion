@@ -5,6 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   optimization: {
@@ -16,9 +17,9 @@ module.exports = {
   entry: ['./src/cision.index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'cision.bundle.js'
   },
-  devtool: 'inline-source-map',
+  devtool: '', // inline-source-map // add for debug purposes
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -103,6 +104,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new BundleAnalyzerPlugin({generateStatsFile: false }),
     new BrotliGzipPlugin({
       asset: '[path].br[query]',
       algorithm: 'brotli',
@@ -118,6 +120,10 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
   }),
+  new webpack.IgnorePlugin({ // tell webpack not to load moment locales except for the stated languages to minimize payload
+    resourceRegExp: /^\.\/locale$/,
+    contextRegExp: /moment$/
+  }), 
     new ExtractTextPlugin('style.css'),
     new CleanWebpackPlugin('dist', {}),
     new webpack.ProvidePlugin({
