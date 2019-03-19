@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our ticker performance module.
 // Built to be used in combination with sharegraph.html, tickerLarge.html or tickerSmall.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.performance = function($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.ticker.accessKey,

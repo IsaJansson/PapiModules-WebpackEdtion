@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
 
+import './module.dependencies.js';
+
 cision.websolution.dividend = function ($) {
     var settings = cision.websolution.settings.general;
     var accessKey = cision.websolution.settings.ticker.accessKey;

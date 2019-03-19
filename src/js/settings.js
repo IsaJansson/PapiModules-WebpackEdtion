@@ -4,7 +4,12 @@
 require('jsrender')($);
 require('highcharts/modules/exporting')(Highcharts);
 window.Popper = require('popper.js').default; // pay attention to "default"
-import 'bootstrap';
+import "bootstrap/js/dist/button";
+import "bootstrap/js/dist/dropdown";
+import "bootstrap/js/dist/modal";
+import "bootstrap/js/dist/tab";
+import "bootstrap/js/dist/tooltip";
+import "bootstrap/js/dist/util";
 import './bootstrap-datepicker.js';
 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
@@ -22,7 +27,7 @@ $.support.cors = true;
 window.cision.websolution.settings = {
     general: {
         // Settings that apply to all modules 
-        serviceEndpoint: 'https://publish.ne.cision.com/papi/',
+        serviceEndpoint: '//publish.ne.cision.com/papi/',
         uiLanguage: 'en',
         useProxyHandler: false,
         // proxyHandler: 'ProxyCallsHttpHandler.ashx',

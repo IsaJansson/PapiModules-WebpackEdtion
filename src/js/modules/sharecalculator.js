@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our sharecalculator module.
 // Built to be used in combination with sharecalculator.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.sharecalculator = function($) {
 
     var settings = $.extend({}, window.cision.websolution.settings.general);

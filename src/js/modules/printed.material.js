@@ -1,6 +1,8 @@
 // This JavaScript file is created by Cision for our printed material module.
 // Built to be used in combination with printedMaterial.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.printedMaterial = function ($) {
 
     var settings = $.extend({}, window.cision.websolution.settings.general),

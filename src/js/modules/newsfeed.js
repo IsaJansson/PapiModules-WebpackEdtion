@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our newsfeed.
 // Built to be used in combination with relese.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.newsfeed =  function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.newsfeed.accessKey;

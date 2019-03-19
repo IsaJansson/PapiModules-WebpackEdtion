@@ -1,6 +1,6 @@
 ﻿// This JavaScript file is created by Cision for our estimate module.
 // Built to be used in combination with estimateannual.html
-
+import './module.dependencies.js';
 window.cision.websolution.estimate = cision.websolution.estimate || {};
 window.cision.websolution.estimate.annual = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),

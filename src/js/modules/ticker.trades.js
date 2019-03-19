@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our ticker trades module.
 // Built to be used in combination with trades.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.trades = function($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.ticker.accessKey;

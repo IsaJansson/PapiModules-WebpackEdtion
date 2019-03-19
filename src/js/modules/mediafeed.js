@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our media feed.
 // Built to be used in combination with media-listing.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.mediafeed = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.mediafeed.accessKey;

@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.sharegraph = function($){
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.sharegraph.accessKey,

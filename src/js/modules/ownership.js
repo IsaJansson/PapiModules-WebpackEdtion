@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our ownership module.
 // Built to be used in combination with ownership.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.ownership = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.ownership.accessKey,

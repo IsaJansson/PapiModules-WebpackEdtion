@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our calendar module.
 // Built to be used in combination with calendar.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.calendar = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = (window.cision.websolution.settings.calendar || {}).accessKey,

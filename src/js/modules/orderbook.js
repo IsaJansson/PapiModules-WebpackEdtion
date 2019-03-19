@@ -1,6 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our orderbook module.
 // Built to be used in combination with orderbook.html
 
+import './module.dependencies.js';
+
 window.cision.websolution.orderbook = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = window.cision.websolution.settings.orderbook.accessKey;

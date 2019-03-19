@@ -57,7 +57,6 @@ a {
 	margin-bottom: 10px;
 }
 .card-columns {
-	//Instead of the line below you could use @include column-count($count)
 	column-count: 5;
 }
 .text-small {
