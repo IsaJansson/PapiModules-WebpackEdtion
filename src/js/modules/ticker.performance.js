@@ -22,10 +22,12 @@ window.cision.websolution.performance = function($) {
         return Promise.resolve(promiseTickerPerformance).then(function (rawData) {
             var rawInstruments = rawData.Instruments;
             var instruments = $.extend(rawInstruments, texts);
-            var sortBySymbol = function (s) {
-                return _.sortBy(s, "Symbol");
-            };
-            var sortedPerformanceData = sortBySymbol(instruments);
+            // var sortBySymbol = function (s) {
+            //     return _.sortBy(s, "Symbol");
+            // };
+            var sortedPerformanceData = instruments.sort(function (a, b) {
+                return a.TickerSymbol - b.Symbol;
+            });
             var htmls = "";
             // Retrieve the Instrument
             var tplElement = '#' + (settings.templateElement || 'tplTickerPerformance');

@@ -14,6 +14,10 @@ module.exports = {
       chunks: 'all'
     }
   },
+  externals: {
+    jquery: 'jQuery',
+    Highcharts: 'highcharts'
+  },
   entry: ['./src/cision.index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -78,33 +82,16 @@ module.exports = {
         use: 'file-loader',
       },
       {
-        test: require.resolve('jquery'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'jQuery'
-        },{
-          loader: 'expose-loader',
-          options: '$'
-        }]
-      },
-      {
         test: require.resolve('moment'),
         use: [{
           loader: 'expose-loader',
           options: 'moment'
         }]
       },
-      {
-        test: require.resolve('underscore'),
-        use: [{
-          loader: 'expose-loader',
-          options: '_'
-        }]
-      },
     ]
   },
   plugins: [
-    new BundleAnalyzerPlugin({generateStatsFile: false }),
+   // new BundleAnalyzerPlugin({generateStatsFile: false }),
     new BrotliGzipPlugin({
       asset: '[path].br[query]',
       algorithm: 'brotli',
@@ -127,13 +114,7 @@ module.exports = {
     new ExtractTextPlugin('style.css'),
     new CleanWebpackPlugin('dist', {}),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
       moment: "moment",
-      _: "underscore",
-      Highcharts: "highcharts/highstock",
-      highcharts: "highcharts/highstock"
     }),
     new HtmlWebpackPlugin({
       inject: 'head',

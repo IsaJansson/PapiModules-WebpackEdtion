@@ -69,10 +69,13 @@ window.cision.websolution.printedMaterial = function ($) {
                     }
                 });
 
-                categories = _.uniq(categories);
+                var uniqueCategories = [];
+                $.each(categories, function(i, el){
+                    if($.inArray(el, uniqueCategories) === -1) uniqueCategories.push(el);
+                });
 
                 if (firstRunList) {
-                    texts.Categories = categories;
+                    texts.Categories = uniqueCategories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories');
                     window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
@@ -109,10 +112,13 @@ window.cision.websolution.printedMaterial = function ($) {
                     itemsList[objItem.ItemGuid] = objItem;
                 });
 
-                categories = _.uniq(categories);
+                var uniqueCategories = [];
+                $.each(categories, function(i, el){
+                    if($.inArray(el, uniqueCategories) === -1) uniqueCategories.push(el);
+                });
 
                 if (firstRunArchiveList) {
-                    texts.Categories = categories;
+                    texts.Categories = uniqueCategories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories');
                     window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);

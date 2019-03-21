@@ -1,7 +1,8 @@
 ﻿// This JavaScript file is created by Cision for our insider module.
 // Built to be used in combination with insiders.html
-import '../insiderTexts.js';
+
 import './module.dependencies.js';
+import './translations/insiderTexts.js';
 
 window.cision.websolution.insiders = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),

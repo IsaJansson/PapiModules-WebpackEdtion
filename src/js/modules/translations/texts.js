@@ -1,4 +1,5 @@
-﻿// This JavaScript file is created by Cision for all our modules.
+﻿
+// This JavaScript file is created by Cision for all our modules.
 // This is the first version of this file so far.
 // This file works as a dictionary for all the modules and could be combined with all of them.
 
@@ -425,12 +426,12 @@ window.cision.websolution.texts["fi"] = {
     TextPeers: "Vertaisryhmään kuuluvat",
     TextReleases: "Sääntelytiedot",
     TextClose: "Sulje",
-    TextIntra: "1PÄ",
-    Text1V: "1VI",
-    Text1M: "1KU",
-    Text3M: "3KU",
-    Text6M: "6KU",
-    Text1Y: "1VU",
+    TextIntra: "1PÄ",
+    Text1V: "1VI",
+    Text1M: "1KU",
+    Text3M: "3KU",
+    Text6M: "6KU",
+    Text1Y: "1VU",
     TextAll: "Kaikki",
     TextInsider: "Sisäpiiriläinen",
     TextDividend: "Osinko",
@@ -550,7 +551,7 @@ window.cision.websolution.texts["fi"] = {
     TextHistorical: "Historiallinen",
     TextRec: "Suositukset",
     TextHistoricalRec: "Historialliset suositukset",
-    TextSME: "Arviot kerätään ja lasketaan <a href='http://www.direkt.se' target='_blank'>SME Direktin.</a> toimesta. Arviot perustuvat ruotsalaisten ja kansainvälisten analyytikoiden näkemyksiin. SME Direkt on Pohjoismaiden johtava konsensusarviopalvelu, joka kattaa 149 Pohjoismaalaista yritystä. SME Direkt perustettiin 1994 ja on osa Nyhetsbyrån Direktiä. Arvioiden tuottajina toimivat Pohjoismaiset johtavat pankit ja välittäjät sekä kansainväliset investointipankit. ",
+    TextSME: "Arviot kerätään ja lasketaan <a href='http://www.direkt.se' target='_blank'>SME Direktin.</a> toimesta. Arviot perustuvat ruotsalaisten ja kansainvälisten analyytikoiden näkemyksiin. SME Direkt on Pohjoismaiden johtava konsensusarviopalvelu, joka kattaa 149 Pohjoismaalaista yritystä. SME Direkt perustettiin 1994 ja on osa Nyhetsbyrån Direktiä. Arvioiden tuottajina toimivat Pohjoismaiset johtavat pankit ja välittäjät sekä kansainväliset investointipankit. ",
     TextSource: "Lähde",
     TextLargest: "Suurimmat osakkeenomistajat",
     TextRange: "Osakevaihtelut",
@@ -592,7 +593,7 @@ window.cision.websolution.texts["fi"] = {
     TextPrintLink: "Linkki digitaaliseen versioon",
     TextPrintQuant: "Tilausmäärä",
     TextOrderPrint: "Tilaa tulostettuina",
-    TextPrintOrderFailHeader: "Tilaus epäonnistui, ota yhteyttä asiakaspalveluun",
+    TextPrintOrderFailHeader: "Tilaus epäonnistui, ota yhteyttä asiakaspalveluun",
     TextPrintOrderSuccessHeader: "Olet tilannut seuraavat tuotteet",
     TextPrintOrderFail: "Something went wrong with your order. Please check what you have entered and try agian.",
     TextPrintOrderSuccess: "You have now ordered the following items: "
@@ -1308,3 +1309,45 @@ window.cision.websolution.texts["sv"].calendarTexts = {
     printChart: ['Skriv ut graf'],
     source: ['Källa']
 };
+window.cision.websolution.texts["no"].calendarTexts = {
+    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    rangeSelectorFrom: ['From'],
+    rangeSelectorTo: ['To'],
+    downloadJPEG: ['Download JPEG image'],
+    downloadPDF: ['Download PDF document'],
+    downloadPNG: ['Download PNG image'],
+    downloadSVG: ['Download SVG vector image'],
+    printChart: ['Print chart'],
+    source: ['Source']
+};
+
+window.cision.websolution.texts["dk"].calendarTexts = {
+    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    rangeSelectorFrom: ['From'],
+    rangeSelectorTo: ['To'],
+    downloadJPEG: ['Download JPEG image'],
+    downloadPDF: ['Download PDF document'],
+    downloadPNG: ['Download PNG image'],
+    downloadSVG: ['Download SVG vector image'],
+    printChart: ['Print chart'],
+    source: ['Source']
+};
+
+window.cision.websolution.texts["de"].calendarTexts = {
+    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    rangeSelectorFrom: ['From'],
+    rangeSelectorTo: ['To'],
+    downloadJPEG: ['Download JPEG image'],
+    downloadPDF: ['Download PDF document'],
+    downloadPNG: ['Download PNG image'],
+    downloadSVG: ['Download SVG vector image'],
+    printChart: ['Print chart'],
+    source: ['Source']
+};
+

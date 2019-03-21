@@ -370,7 +370,7 @@ window.cision.websolution.texts["fi"].insidersDescriptions = function () {
 
 
     securityTypes[1] = "Osake";
-    securityTypes[2] = "Osake  PR";
+    securityTypes[2] = "Osake  PR";
     securityTypes[3] = "Osto-optio";
     securityTypes[4] = "Myyntioptio";
     securityTypes[5] = "Osakefutuurit";

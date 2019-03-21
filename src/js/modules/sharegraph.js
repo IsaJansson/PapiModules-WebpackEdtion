@@ -1,6 +1,6 @@
 ﻿// This JavaScript file is created by Cision for our sharegraph module.
 // Built to be used in combination with sharegraph.html
-import '../insiderTexts.js';
+
 import './module.dependencies.js';
 
 window.cision.websolution.sharegraph = function($){
@@ -273,7 +273,7 @@ window.cision.websolution.sharegraph = function($){
 
     var setInstrumentVisibility = function (uniqueKey, makeVisible) {
         // var objChart = Highcharts.chart(settings.chartContainerId);
-
+        
         $.each(objChart.series, function (idx, objSerie) {
             var objCurrentInstrument = objSerie.userOptions.objOriginal; /* the original object is attached above */
 
@@ -913,7 +913,7 @@ window.cision.websolution.sharegraph = function($){
                 printChart: window.cision.websolution.texts[settings.uiLanguage].calendarTexts['printChart']
             }
         });
-
+       
         objChart = new Highcharts.StockChart({
             chart: {
                 renderTo: settings.chartContainerId,

@@ -186,59 +186,56 @@ window.cision.websolution.ownership = function ($) {
             var reorderedAreas = [];
             settings.ownershipAreasNames = settings.ownershipAreasNames || {};
             var textsAreaNames = texts.TextOwnershipAreaNames || {};
-
-            var objAreaSweden = _.findWhere(rawData.Areas,
-                {
-                    AreaName: settings.ownershipAreasNames.sweden || 'SVERIGEBOENDE'
-                });
+    
+            var objAreaSweden = rawData.Areas.filter(function (el) { 
+                return el.AreaName == 'SVERIGEBOENDE' 
+            });
             if (objAreaSweden) {
                 objAreaSweden.AreaName = textsAreaNames.Sweden || objAreaSweden.AreaName;
-                reorderedAreas.push(objAreaSweden);
+                reorderedAreas.push(objAreaSweden[0]);
             }
 
-            var objAreaUsa = _.findWhere(rawData.Areas,
-                {
-                    AreaName: settings.ownershipAreasNames.usa || 'USA'
-                });
+            var objAreaUsa = rawData.Areas.filter(function (el) { 
+                return el.AreaName == 'USA' 
+            });
             if (objAreaUsa) {
                 objAreaUsa.AreaName = textsAreaNames.Usa || objAreaUsa.AreaName;
-                reorderedAreas.push(objAreaUsa);
+                reorderedAreas.push(objAreaUsa[0]);
             }
 
-            var objAreaNordic = _.findWhere(rawData.Areas,
-                {
-                    AreaName: settings.ownershipAreasNames.nordic || 'ÖVRIGA NORDEN'
-                });
+            var objAreaNordic = rawData.Areas.filter(function (el) { 
+                return el.AreaName == 'ÖVRIGA NORDEN' 
+            });
             if (objAreaNordic) {
                 objAreaNordic.AreaName = textsAreaNames.Nordic || objAreaNordic.AreaName;
-                reorderedAreas.push(objAreaNordic);
+                reorderedAreas.push(objAreaNordic[0]);
             }
 
-            var objAreaEurope = _.findWhere(rawData.Areas,
-                {
-                    AreaName: settings.ownershipAreasNames.europe || 'ÖVRIGA EUROPA (EXKL SVERIGE OCH NORDEN)'
-                });
+            var objAreaEurope = rawData.Areas.filter(function (el) { 
+                return el.AreaName == 'ÖVRIGA EUROPA (EXKL SVERIGE OCH NORDEN)' 
+            });
             if (objAreaEurope) {
                 objAreaEurope.AreaName = textsAreaNames.Europe || 'ÖVRIGA EUROPA' /* objAreaEurope.AreaName */;
-                reorderedAreas.push(objAreaEurope);
+                reorderedAreas.push(objAreaEurope[0]);
             }
 
-            var objAreaWorld = _.findWhere(rawData.Areas,
-                {
-                    AreaName: settings.ownershipAreasNames.world || 'ÖVRIGA VÄRLDEN'
-                });
+            var objAreaWorld = rawData.Areas.filter(function (el) { 
+                return el.AreaName == 'ÖVRIGA VÄRLDEN' 
+            });
             if (objAreaWorld) {
                 objAreaWorld.AreaName = textsAreaNames.World || objAreaWorld.AreaName;
-                reorderedAreas.push(objAreaWorld);
+                reorderedAreas.push(objAreaWorld[0]);
             }
 
-            var objAreaTotal = _.findWhere(rawData.Areas, { OwnershipPercent: 100 });
+            var objAreaTotal = rawData.Areas.filter(function (el) { 
+                return el.OwnershipPercent == 100
+            });
             if (objAreaTotal) {
                 objAreaTotal.AreaName = textsAreaNames.Total || objAreaTotal.AreaName;
             }
 
             rawData.Areas = reorderedAreas;
-            rawData.Total = objAreaTotal;
+            rawData.Total = objAreaTotal[0];
 
             rawData.DateFormatted = moment(rawData.Date).format('ll');
 

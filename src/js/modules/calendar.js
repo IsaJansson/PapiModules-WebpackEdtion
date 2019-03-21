@@ -6,10 +6,8 @@ import './module.dependencies.js';
 window.cision.websolution.calendar = function ($) {
     var settings = $.extend({}, window.cision.websolution.settings.general),
         accessKey = (window.cision.websolution.settings.calendar || {}).accessKey,
-        texts = window.cision.websolution.texts[settings.uiLanguage],
         categories = [],
-        firstRunEvent = true,
-        firstRunArchive = true;
+        firstRunEvent = true;
 
     var getPostData = function () {
         if (settings.accessKey) {
@@ -83,7 +81,10 @@ window.cision.websolution.calendar = function ($) {
                     }
                 });
 
-                categories = _.uniq(categories);
+                var uniqueCategories = [];
+                $.each(categories, function(i, el){
+                    if($.inArray(el, uniqueCategories) === -1) uniqueCategories.push(el);
+                });
 
                 if (settings.separateFirstEvent === true && settings.calendarCategory == '') {
                     rawData.Events.shift();
@@ -100,7 +101,7 @@ window.cision.websolution.calendar = function ($) {
                 }
 
                 if (firstRunEvent) {
-                    texts.Categories = categories;
+                    texts.Categories = uniqueCategories;
                     var tplCategoryElement = '#' + (settings.categoriesTemplateElement || 'tplCategories');
                     var tplCategoryTarget = '#' + (settings.categoriesOutputTargetElement || 'target-categories'); 
                     window.cision.websolution.common.modelToHtml({}, tplCategoryElement, tplCategoryTarget);
@@ -141,7 +142,10 @@ window.cision.websolution.calendar = function ($) {
                     }
                 });
 
-                categories = _.uniq(categories);
+                var uniqueCategories = [];
+                $.each(categories, function(i, el){
+                    if($.inArray(el, uniqueCategories) === -1) uniqueCategories.push(el);
+                });
 
                 if (settings.separateFirstEvent === true && settings.calendarCategory == '') {
                     rawData.Events.shift();

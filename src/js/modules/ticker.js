@@ -31,11 +31,14 @@ window.cision.websolution.tickers = function($) {
                     tickers: []
                 };
 
-                var sortBySymbol = function (s) {
-                    return _.sortBy(s, "TickerSymbol");
-                };
+                // var sortBySymbol = function (s) {
+                //     return _.sortBy(s, "TickerSymbol");
+                // };
 
-                var sortedTickerData = sortBySymbol(tickerData.Instruments);
+                var sortedTickerData = tickerData.Instruments.sort(function (a, b) {
+                    return a.TickerSymbol - b.TickerSymbol;
+                });
+
                 for (var instrumentIx = 0; instrumentIx < sortedTickerData.length; instrumentIx++) {
                     var instrument = sortedTickerData[instrumentIx],
                         lastDate = "2010-02-01T00:00:00.000000Z",
