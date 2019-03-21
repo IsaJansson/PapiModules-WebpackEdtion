@@ -61,10 +61,13 @@
         });
 
         function changePage(pageIndex, pageSize) {
-            window.cision.websolution.newsfeed.render({
+            var promise = window.cision.websolution.newsfeed.render({
                 pageIndex: pageIndex,
                 pageSize: pageSize,
                 introMaxLength: 120
+            });
+            promise.then(function(){
+                window.scrollTo(0, 0);
             });
         };
     </script>

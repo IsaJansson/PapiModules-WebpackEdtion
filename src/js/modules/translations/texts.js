@@ -56,7 +56,7 @@ window.cision.websolution.texts["sv"] = {
     TextTotalReturn: "Total avkastning",
     TextIndicatorDisabledTooltip: "Detta val bör inte kombineras med volym",
     TextVolumeDisabledTooltip: "Detta val bör inte kombineras med kurspåverkande information",
-    TextDelayInfo: "Kursinformationen är fördröjd med 15 minuter.",
+    TextDelayInfo: "Kursinformationen är 15 minuter fördröjd.",
     TextCredits: "Källa Cision/Millistream",
 
     // Insider translations

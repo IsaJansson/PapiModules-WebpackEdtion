@@ -12,6 +12,7 @@ window.cision.websolution.texts["sv"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     transactionTypes[0] = "Orsak okänd vid reg.";
     transactionTypes[1] = "Innehavsanmälan";
@@ -138,7 +139,8 @@ window.cision.websolution.texts["sv"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);
 
@@ -148,6 +150,7 @@ window.cision.websolution.texts["en"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     transactionTypes[0] = " Reason unknown at time of reg.";
     transactionTypes[1] = " Holding notification";
@@ -274,7 +277,8 @@ window.cision.websolution.texts["en"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);
 
@@ -283,6 +287,7 @@ window.cision.websolution.texts["fi"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     transactionTypes[0] = "Syy tuntematon kirjaushetkellä.";
     transactionTypes[1] = "Omistusosuuksien ilmoittaminen";
@@ -409,7 +414,8 @@ window.cision.websolution.texts["fi"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);
 
@@ -418,6 +424,7 @@ window.cision.websolution.texts["no"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     transactionTypes[0] = "Årsak ukjent ved registering.";
     transactionTypes[1] = "Beholdningsvarsling";
@@ -544,7 +551,8 @@ window.cision.websolution.texts["no"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);
 
@@ -553,6 +561,7 @@ window.cision.websolution.texts["dk"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     transactionTypes[0] = "Årsag ukendt på reg.tidspunkt.";
     transactionTypes[1] = "Indberetning af aktiebeholdning";
@@ -679,7 +688,8 @@ window.cision.websolution.texts["dk"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);
 
@@ -688,6 +698,7 @@ window.cision.websolution.texts["de"].insidersDescriptions = function () {
     var positionTypes = [];
     var holderTypes = [];
     var securityTypes = [];
+    var commentTypes = [];
 
     //incomplete translation 90% in english
 
@@ -816,6 +827,7 @@ window.cision.websolution.texts["de"].insidersDescriptions = function () {
         positionTypes: positionTypes,
         holderTypes: holderTypes,
         securityTypes: securityTypes,
-        transactionTypes: transactionTypes
+        transactionTypes: transactionTypes,
+        commentTypes: commentTypes
     };
 }(jQuery);

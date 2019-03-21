@@ -372,8 +372,6 @@ window.cision.websolution.sharegraph = function($){
         var makeVisible = $el.hasClass("selected");
         settings.endOfDayStartFrom = $('#datePickerFrom input').val();
 
-        disableVolume(false);
-
         if (triggerComparison) {
             if (makeVisible) {
                 triggerAutomaticComparison++;
@@ -421,38 +419,12 @@ window.cision.websolution.sharegraph = function($){
 
         if (uniqueKey == 'INSIDERS' && makeVisible) {
             addInsiders(settings.endOfDayStartFrom, uniqueKey);
-            disableVolume(true);
         }
         if (uniqueKey == 'DIVIDEND' && makeVisible) {
             addDividends(settings.endOfDayStartFrom, uniqueKey);
-            disableVolume(true);
         }
         if ((uniqueKey == 'Regulatory PRM' || uniqueKey == 'Regulatory RPT') && makeVisible) {
             showReleasesOnChart(uniqueKey);
-            disableVolume(true);
-        }
-    }
-
-    function disableVolume(disable) {
-        if (disable) {
-            $('.volume').addClass('cision-disabled');
-            $('.volume').tooltip({
-                trigger: 'hover'
-            });
-        } else {
-            $('.volume').removeClass('cision-disabled');
-            $('.volume').tooltip('dispose');
-        }
-    }
-    function disableIndicators(disable) {
-        if (disable) {
-            $('.indicator').addClass('cision-disabled');
-            $('.indicator').tooltip({
-                trigger: 'hover'
-            });
-        } else {
-            $('.indicator').removeClass('cision-disabled');
-            $('.indicator').tooltip('dispose');
         }
     }
 
@@ -730,7 +702,6 @@ window.cision.websolution.sharegraph = function($){
                         objOriginal: objInstrument
                     });
                 }
-                disableIndicators(settings.showVolume);
 
                 if (objInstrument.EffectiveYields && objInstrument.EffectiveYields.length > 0) {
                     // Process Effective Yield
