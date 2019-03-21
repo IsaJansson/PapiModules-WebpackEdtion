@@ -76,6 +76,7 @@ window.cision.websolution.texts["sv"] = {
     TextTransactions: "Transaktioner",
     TextLastTransaction: "Senaste Transaktion",
     TextHolder: "Innehavare",
+    TextStatus: "Status",
 
     // other ir modules translations
     TextNumberRec: "Antal rekommendationer",
@@ -267,6 +268,7 @@ window.cision.websolution.texts["en"] = {
     TextTransactions: "Transactions",
     TextLastTransaction: "Last Transaction",
     TextHolder: "Holder",
+    TextStatus: "Status",
 
     // other ir modules translations
     TextNumberRec: "Number of recommendations",
@@ -466,6 +468,8 @@ window.cision.websolution.texts["fi"] = {
     TextTransactions: "Liiketoimet",
     TextLastTransaction: "Viimeisin liiketoimi",
     TextHolder: "Omistaja",
+    TextStatus: "Status",
+    
     TextTotalReturn: "Total return",
     TextIndicatorDisabledTooltip: "This option should not be viewed at the same time as volume since they are overlapping in the graph",
     TextVolumeDisabledTooltip: "This option should not be viewed at the same time as any of the indicators since they are overlapping in the graph",
@@ -659,6 +663,7 @@ window.cision.websolution.texts["dk"] = {
     TextTransactions: "Transactions",
     TextLastTransaction: "Last Transaction",
     TextHolder: "Holder",
+    TextStatus: "Status",
 
     // other ir modules translations
     TextNumberRec: "Number of recommendations",
@@ -855,6 +860,7 @@ window.cision.websolution.texts["no"] = {
     TextTransactions: "Transactions",
     TextLastTransaction: "Last Transaction",
     TextHolder: "Holder",
+    TextStatus: "Status",
 
     // other ir modules translations
     TextNumberRec: "Number of recommendations",
@@ -1052,6 +1058,7 @@ window.cision.websolution.texts["de"] = {
     TextTransactions: "Transactions",
     TextLastTransaction: "Last Transaction",
     TextHolder: "Holder",
+    TextStatus: "Status",
 
     // other ir modules translations
     TextNumberRec: "Number of recommendations",

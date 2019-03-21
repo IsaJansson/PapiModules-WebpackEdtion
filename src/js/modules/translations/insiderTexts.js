@@ -68,6 +68,8 @@ window.cision.websolution.texts["sv"].insidersDescriptions = function () {
     transactionTypes[52] = "Övrig förändring";
     transactionTypes[53] = "Avslut av insyn";
 
+    commentTypes["makulerad"] = "Makulerad";
+    commentTypes["reviderad"] = "Reviderad";
 
     holderTypes[1] = "Eget";
     holderTypes[2] = "Maka/Make";
@@ -202,6 +204,8 @@ window.cision.websolution.texts["en"].insidersDescriptions = function () {
     transactionTypes[52] = "Övrig förändring";
     transactionTypes[53] = "Avslut av insyn";
 
+    commentTypes["makulerad"] = "Cancelled";
+    commentTypes["reviderad"] = "Revised";
 
     holderTypes[1] = "Own";
     holderTypes[2] = "Spouse";
@@ -335,6 +339,8 @@ window.cision.websolution.texts["fi"].insidersDescriptions = function () {
     transactionTypes[52] = "Muu muutos";
     transactionTypes[53] = "Tarkastustulos";
 
+    commentTypes["makulerad"] = "Cancelled";
+    commentTypes["reviderad"] = "Revised";
 
     holderTypes[1] = "Oma";
     holderTypes[2] = "Puoliso";
@@ -468,6 +474,8 @@ window.cision.websolution.texts["no"].insidersDescriptions = function () {
     transactionTypes[52] = "Øvrig forandring";
     transactionTypes[53] = "Avslutning av innsyn";
 
+    commentTypes["makulerad"] = "Cancelled";
+    commentTypes["reviderad"] = "Revised";
 
     holderTypes[1] = "Egen";
     holderTypes[2] = "Partner";
@@ -601,6 +609,8 @@ window.cision.websolution.texts["dk"].insidersDescriptions = function () {
     transactionTypes[52] = "Øvrige ændringer";
     transactionTypes[53] = "Afslutning af indsigt";
 
+    commentTypes["makulerad"] = "Cancelled";
+    commentTypes["reviderad"] = "Revised";
 
     holderTypes[1] = "Eget";
     holderTypes[2] = "Ægtefælle";
@@ -736,6 +746,8 @@ window.cision.websolution.texts["de"].insidersDescriptions = function () {
     transactionTypes[52] = "Övrig förändring";
     transactionTypes[53] = "Avslut av insyn";
 
+    commentTypes["makulerad"] = "Cancelled";
+    commentTypes["reviderad"] = "Revised";
 
     holderTypes[1] = "Own";
     holderTypes[2] = "Spouse";

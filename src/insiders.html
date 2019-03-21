@@ -32,6 +32,7 @@
                     <th>{{>TextQuantity}}</th>
                     <th style="min-width:100px;">{{>TextPrice}} {{>TradeCurrency}}</th>
                     <th>{{>TextTransaction}}</th>
+                    <td>{{>TextStatus}}</td>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,7 @@
                     <td>{{>~formatNumber(Quantity, 0)}}</td>
                     <td>{{>~formatNumber(Price, 2)}}</td>
                     <td>{{>TransactionTypeDescription}}</td>
+                    <td>{{>Status}}</td>
                 </tr>
                 {{/for}}
             </tbody>

@@ -34,6 +34,11 @@ window.cision.websolution.insiders = function ($) {
                 objTransaction.PositionDescription = textsInsidersDescriptions.positionTypes[objTransaction.PositionId];
                 objTransaction.HolderTypeDescription = textsInsidersDescriptions.holderTypes[objTransaction.HolderTypeId];
 
+                if (objTransaction.Comment)
+                    objTransaction.Status = textsInsidersDescriptions.commentTypes[objTransaction.Comment.toLowerCase()] || objTransaction.Comment;
+                else
+                    objTransaction.Status = "";
+
                 if (objTransaction.HolderName) {
                     objTransaction.HolderTypeDescription += ' [' + objTransaction.HolderName + ']';
                 }
